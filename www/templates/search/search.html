@@ -5,8 +5,27 @@
         <div class="logoContainer">
           <img src="" alt="Innovation">
         </div>
-        <input type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-class="classInput" ng-click="clickInput()">
+        <input type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-class="classInput" ng-click="clickInput()" ng-model = 'search'>
+        <table ng-if='search != null && search.length != 0'>
+ 		<thead>
+ 			<tr>
+ 				<td>
+ 					Nombre:
+ 				</td>
+ 				  
+ 			</tr>
+ 		</thead>
+ 		<tbody>
+ 			<tr ng-repeat = "dato in objeInvitados | filter: search ">
+ 				<td >
+	 				<a ng-click = "selectItem(dato)">
+	 					{{dato.Nombre }}
+	 				</a>
+ 				</td>
 
+ 			</tr>
+ 		</tbody>
+ 	</table>
 
     </ion-content>
 
