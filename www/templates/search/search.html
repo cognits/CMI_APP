@@ -5,27 +5,29 @@
         <div class="logoContainer">
           <img src="" alt="Innovation">
         </div>
-        <input type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-class="classInput" ng-click="clickInput()" ng-model = 'search'>
-        <table ng-if='search != null && search.length != 0'>
- 		<thead>
- 			<tr>
- 				<td>
- 					Nombre:
- 				</td>
- 				  
- 			</tr>
- 		</thead>
- 		<tbody>
- 			<tr ng-repeat = "dato in objeInvitados | filter: search ">
- 				<td >
-	 				<a ng-click = "selectItem(dato)">
-	 					{{dato.Nombre }}
-	 				</a>
- 				</td>
+        <div class="inputSearchContainer"  ng-class="classInput">
+          <input type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-click="clickInput()" ng-model = 'search'>
+        </div>
+        <div class="tableContainer"  ng-if='search != null && search.length != 0'>
 
- 			</tr>
- 		</tbody>
- 	</table>
+
+          <table class="tableSearch">
+         		<tbody>
+         			<tr ng-repeat = "dato in objeInvitados | filter: search "  ng-click = "selectItem(dato)">
+         				<td>
+        	 					{{dato.Nombre }}
+         				</td>
+                <td>
+        	 					Cargo
+         				</td>
+                <td ng-click = "selectItem(dato)">
+        	 					<img src="" alt="" style="width:30px; height: 30px;">
+         				</td>
+
+         			</tr>
+         		</tbody>
+         	</table>
+        </div>
 
     </ion-content>
 

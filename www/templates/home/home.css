@@ -37,11 +37,18 @@
   line-height: 1;
 }
 
-.buttonRegister {
+.button.button-energized {
   color: #fff;
   font-size: 2rem;
   background-color: #f5a917;
   padding: 20px;
+  margin-top: 50px;
+}
+
+.button.button-energized.active, .button.button-energized.activated, .button.button-energized:hover {
+  border-color: #a2a2a2;
+  background-color: #f6a303;
+  color: #fff;
 }
 
 .buttonAdminContainer{
@@ -51,8 +58,15 @@
   height: 25%;
 }
 
-.buttonAdmin{
+.button.button-light{
   font-size: 1.5rem;
   color: #0906a2;
   margin-right: 30px;
+  padding: 15px;
+}
+
+.button.button-light.active, .button.button-light.activated, .button.button-light:hover {
+  border-color: #a2a2a2;
+  background-color: #eaeaea;
+  color: #0906a2;
 }
