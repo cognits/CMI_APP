@@ -1,0 +1,88 @@
+.foodContainer {
+  background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
+  height: 100%;
+}
+
+.foodContainer>div {
+  height: 100%;
+  overflow: hidden;
+}
+
+.boxFoodContainer{
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxFood{
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  height: auto;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.boxFood > div{
+  width: 60%;
+}
+
+.userNameFood{
+  font-size: 2rem;
+  color: #54585A;
+  font-family: roboto_black;
+}
+
+.grayText{
+  font-size: 1rem;
+  font-family: roboto_bold;
+}
+
+.willEatText{
+  font-size: 1rem;
+  font-family: roboto_bold;
+  margin-top: 50px;
+}
+
+.checkRadioContainer{
+  margin: 50px 0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkRadioContainer > div{
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.checked{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.noContainer{
+  justify-content: flex-end;
+}
+
+.unchecked{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.checkRadioContainer > div > span{
+  margin-left: 10px
+}

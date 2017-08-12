@@ -7,7 +7,7 @@ var config = {
     messagingSenderId: "970565718586"
   };
 var CMI = firebase.initializeApp(config);
-app.controller("searchCtrl", function($scope, $firebaseArray){
+app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $state){
 	var ref = CMI.database().ref('Invitados');
   $scope.objeInvitados = $firebaseArray(ref);
 	$scope.objeInvitados.$loaded(function() {
@@ -19,8 +19,20 @@ app.controller("searchCtrl", function($scope, $firebaseArray){
 
   $scope.selectItem = function(item) {
 		console.log(item)
-
+    $scope.modal_confirm.show();
 	}
 
+  $ionicModal.fromTemplateUrl('templates/modal_confirm/modal_confirm.html', function(modal) {
+    $scope.modal_confirm = modal;
+  }, {
+    animation: 'slide-in-up',
+    focusFirstInput: false
+  });
+})
 
+app.controller("modalCtrl", function($scope, $ionicModal, $state){
+
+  $scope.navigateFood = function() {
+    $state.go("food")
+  }
 })

@@ -53,6 +53,11 @@ var app = angular.module('starter', ['ionic' , 'firebase'])
     controller: "searchCtrl"
   })
 
+  .state('food', {
+    url: '/food',
+    templateUrl: 'templates/food/food.html',
+  })
+
 
 
   $urlRouterProvider.otherwise('/home');

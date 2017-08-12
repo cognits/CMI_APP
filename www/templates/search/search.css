@@ -1,5 +1,10 @@
 .searchContainer {
   background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
   height: 100%;
 }
 
@@ -67,4 +72,5 @@
   border-bottom: 1px solid gray;
   padding: 20px;
   color: gray;
+  line-height: 1;
 }

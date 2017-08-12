@@ -1,5 +1,10 @@
 .homeContainer {
   background-color: black;
+  background:  url(../../img/bg.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
   height: 100%;
 }
 
@@ -17,7 +22,6 @@
 
 .logoContainer > img{
   width: 33%;
-  height: 100px;
   text-align: center;
   color: #fff;
   font-size: 20px;
@@ -26,6 +30,7 @@
 .welcomeContainer {
   height: 50%;
   color: #fff;
+  font-family: roboto_bold;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -40,14 +45,15 @@
 .button.button-energized {
   color: #fff;
   font-size: 2rem;
-  background-color: #f5a917;
+  background-color: #ff9A00;
   padding: 20px;
   margin-top: 50px;
+  font-family: roboto_bold;
 }
 
 .button.button-energized.active, .button.button-energized.activated, .button.button-energized:hover {
   border-color: #a2a2a2;
-  background-color: #f6a303;
+  background-color: #ea9007;
   color: #fff;
 }
 
@@ -60,13 +66,14 @@
 
 .button.button-light{
   font-size: 1.5rem;
-  color: #0906a2;
+  color: #54585A;
   margin-right: 30px;
-  padding: 15px;
+  padding: 2px 10px;
+  font-family: roboto_bold;
 }
 
 .button.button-light.active, .button.button-light.activated, .button.button-light:hover {
   border-color: #a2a2a2;
   background-color: #eaeaea;
-  color: #0906a2;
+  color: #54585A;
 }
