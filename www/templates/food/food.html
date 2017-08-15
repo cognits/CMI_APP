@@ -12,31 +12,22 @@
               <p class="userNameFood">Daniel Ortega</p>
               <p class="grayText">CMI Corporativo</p>
               <p class="grayText">dan.ortega@cmi.co</p>
-
+              <hr class="line">
               <p class="willEatText">¿Comerás en el evento?</p>
               <div class="checkRadioContainer">
                 <div class="yesContainer">
-                  <button class="checked"></button>
+                  <button class="unchecked" ng-class="selectYes" ng-click="checkYes()"></button>
                   <span>Si</span>
                 </div>
                 <div class="noContainer">
-                  <button class="unchecked"></button>
+                  <button class="unchecked" ng-class="selectNo" ng-click="checkNo()"></button>
                   <span>No</span>
                 </div>
 
               </div>
-              <button class="buttonConfirm button button-dark" ng-click="navigateFood()">Confirmar</button>
+              <button class="buttonConfirm button button-dark" ng-click="modalPrint.show()">Confirmar</button>
             </div>
-
-
-
           </div>
-
         </div>
-
-
-
     </ion-content>
-
-
 </ion-view>

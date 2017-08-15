@@ -56,6 +56,7 @@ var app = angular.module('starter', ['ionic' , 'firebase'])
   .state('food', {
     url: '/food',
     templateUrl: 'templates/food/food.html',
+    controller: "foodCtrl"
   })
 
 

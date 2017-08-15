@@ -77,3 +77,20 @@
   background-color: #eaeaea;
   color: #54585A;
 }
+
+@media screen and (max-height: 600px){
+
+  .welcomeContainer{
+    font-size: 4rem;
+  }
+
+  .button.button-energized{
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-top: 0px;
+  }
+
+  .buttonAdmin{
+    font-size: 1rem;
+  }
+}
