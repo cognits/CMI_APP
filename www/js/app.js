@@ -59,6 +59,22 @@ var app = angular.module('starter', ['ionic' , 'firebase'])
     controller: "foodCtrl"
   })
 
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login/login.html',
+  })
+
+  .state('insert_name', {
+    url: '/insert_name',
+    templateUrl: 'templates/insert_name/insert_name.html',
+  })
+
+  .state('info_user', {
+    url: '/info_user',
+    templateUrl: 'templates/info_user/info_user.html',
+    controller: "info_userCtrl"
+  })
+
 
 
   $urlRouterProvider.otherwise('/home');

@@ -1,19 +1,19 @@
 
-<ion-modal-view id="modalConfirm" class="modalPrintContainer" ng-controller="modalCtrl">
-  <ion-content class="contentModalConfirm">
-    <div class="modalConfirm">
+<ion-modal-view id="modalPrint" class="modalPrintContainer" ui-sref="home" ng-click="modal.hide()">
+  <ion-content class="contentModalPrint">
+      <div class="logoContainer">
+        <img src="img/whitelogolarge.png" alt="Innovation">
+      </div>
+      <div class="containerTexIsPrinting">
+        <div>
+          <p class="ThanksText" ng-if="thanks">¡Gracias <span>Daniel</span>!</p>
+          <p class="YourCarneIsPrintingText" ng-if="isPrinting">Tu carné se está imprimiendo</p>
 
-      <div class="contentConfirm">
-        <p class="confirmYourSelectionText">Confirma tu selección</p>
-        <p class="userNameText">Daniel Ortega</p>
-        <p class="employmentText">CMI Corporativo</p>
-        <div class="buttonsContainer">
-          <button class="buttonCancel button button-stable" ng-click="modal.hide()">Cancelar</button>
-          <button class="buttonConfirm button button-dark" ng-click="navigateFood()">Confirmar</button>
+          <p class="ThanksText" ng-if="isPrintingWithoutThanks">¡El carné se está imprimiendo!</p>
+
         </div>
       </div>
 
-    </div>
 
   </ion-content>
 </ion-modal-view>

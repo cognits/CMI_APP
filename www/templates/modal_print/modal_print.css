@@ -1,91 +1,47 @@
-.modalConfirmContainer{
+.modalPrintContainer{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:transparent;
+  background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
 }
 
-.contentModalConfirm{
-  position: relative;
-  width: 70%;
+.contentModalPrint > div{
+  height: 100%;
 }
 
-.modalConfirm{
-  background-color: #FCFCFB;
-  border-radius: 4px;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+.containerTexIsPrinting{
   text-align: center;
-  color: #A4A5A8;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding: 30px 0;
+  height: 60%;
 }
 
-.contentConfirm{
-  width: 80%;
+.ThanksText{
+  font-size: 4rem;
+  font-family: Roboto_Bold;
+  line-height: 1;
 }
 
-.confirmYourSelectionText{
-  color: #9b9b9b;
-  font-family: roboto_bold;
-  font-size: 1rem;
+.YourCarneIsPrintingText{
+  font-size: 3rem;
+  line-height: 1;
+  /*font-family: Roboto_Bold;*/
 }
 
-.userNameText{
-  color: #ff9a00;
-  font-family: roboto_bold;
-  margin-top: 30px;
-  font-size: 2rem;
-}
-
-.employmentText{
-  color: #9b9b9b;
-  font-size: 1.5rem;
-}
-
-.buttonsContainer{
-  margin-top: 50px;
-}
-
-.buttonCancel{
-  background-color: transparent;
-  color: #c11010;
-  font-family: roboto_bold;
-  padding: 10px 30px;
-  font-size: 1.3rem;
-}
-
-.button.button-stable{
-  background-color: transparent;
-  color: #c11010;
-  font-family: roboto_bold;
-  padding: 10px 30px;
-  font-size: 1.3rem;
-}
-
-.button.button-stable.active, .button.button-stable.activated {
-  background-color: transparent;
-  color: #9d0c0c;
-  border-color: transparent;
-}
-
-.button.button-dark{
-  background-color: #54585A;
-  color: #fff;
-  font-family: roboto_bold;
-  padding: 10px 30px;
-  font-size: 1.3rem;
-}
-
-.button.button-dark.active, .button.button-dark.activated{
-  background-color: #484c4e;
-}
-
-@media screen and (max-height: 600px) {
-  .button.button-stable, .button.button-dark{
-    padding: 0px 15px;
+@media (min-width: 680px){
+  .modalPrintContainer {
+     top: 0%;
+     right: 0%;
+     bottom: 0%;
+     left: 0%;
+     min-height: 0;
+     width: 100%;
   }
-
 }

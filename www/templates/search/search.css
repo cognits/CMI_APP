@@ -36,17 +36,6 @@
 }
 
 .inputSearchYourNameTop{
-  /*color: #fff !important;
-  background-color: transparent;
-  font-size: 5rem !important;
-  position: absolute;
-  top: 25%;
-  bottom: inherit;
-  left: 0;
-  right: 0;
-  width: 80%;
-  margin: auto;
-  height: 106px !important;*/
   height: 20% !important;
 }
 
@@ -69,11 +58,24 @@
 }
 
 .tableSearch > tbody > tr > td{
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-bottom: 1px solid gray;
-  padding: 20px;
+  padding: 0 20px;
   color: gray;
   line-height: 1;
+  font-family: Roboto_Regular;
+  vertical-align: middle;
+  height: 70px;
+}
+
+.tableSearch > tbody > tr > td:nth-child(1){
+  font-family: Roboto_Bold;
+  color: #54585a;
+}
+
+.imgArrowRight{
+  width: 30px;
+  margin-top: 5px;
 }
 
 @media screen and (max-height: 600px) {

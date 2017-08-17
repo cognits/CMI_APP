@@ -51,7 +51,7 @@
   font-family: roboto_bold;
 }
 
-.button.button-energized.active, .button.button-energized.activated, .button.button-energized:hover {
+.button.button-energized.active, .button.button-energized.activated {
   border-color: #a2a2a2;
   background-color: #ea9007;
   color: #fff;
@@ -70,11 +70,12 @@
   margin-right: 30px;
   padding: 2px 10px;
   font-family: roboto_bold;
+  border: none;
 }
 
-.button.button-light.active, .button.button-light.activated, .button.button-light:hover {
+.button.button-light.active, .button.button-light.activated {
   border-color: #a2a2a2;
-  background-color: #eaeaea;
+  background-color: #f6f6f6;
   color: #54585A;
 }
 

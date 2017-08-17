@@ -37,14 +37,8 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
   });
 })
 
-app.controller("modalCtrl", function($scope, $ionicModal, $state){
 
-  $scope.navigateFood = function() {
-    $state.go("food")
-  }
-})
-
-app.controller("foodCtrl", function($scope, $ionicModal){
+app.controller("foodCtrl", function($scope, $ionicModal, $state){
 
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
@@ -59,7 +53,85 @@ app.controller("foodCtrl", function($scope, $ionicModal){
   $ionicModal.fromTemplateUrl('templates/modal_print/modal_print.html', function(modal) {
     $scope.modal_print = modal;
   }, {
-    animation: 'slide-in-up',
+    scope: $scope,
+    animation: 'fade',
     focusFirstInput: false
   });
+
+
+
+  $scope.showModalPrint = function(){
+    $scope.thanks = true;
+    $scope.isPrinting = true;
+    $scope.isPrintingWithoutThanks = false;
+    $scope.modal_print.show();
+    setTimeout(function(){
+      $scope.modal_print.hide();
+      $state.go("home");
+    }, 2000)
+  }
+
+})
+
+app.controller("info_userCtrl", function($scope, $state, $ionicModal){
+  $scope.tableChoose = true;
+  $scope.info = false;
+  $scope.editInfo = false;
+  $scope.clickInfo = function(tableChoose, info, editInfo){
+    $scope.tableChoose = tableChoose;
+    $scope.info = info;
+    $scope.editInfo = editInfo;
+  }
+
+  $scope.clickBack = function(){
+    if ($scope.tableChoose == true) {
+      $scope.info = false;
+      $scope.editInfo = false;
+      $state.go("insert_name")
+    }
+
+    if ($scope.info == true) {
+      $scope.tableChoose = true;
+      $scope.info = false;
+      $scope.editInfo = false;
+    }
+
+    if ($scope.editInfo == true) {
+      $scope.tableChoose = false;
+      $scope.info = true;
+      $scope.editInfo = false;
+    }
+  }
+
+  $scope.checkYes = function() {
+    $scope.selectYes = "checked"
+    $scope.selectNo = "unchecked"
+  }
+
+  $scope.checkNo = function() {
+    $scope.selectYes = "unchecked"
+    $scope.selectNo = "checked"
+  }
+
+
+  $ionicModal.fromTemplateUrl('templates/modal_print/modal_print.html', function(modal) {
+    $scope.modal_print = modal;
+  }, {
+    scope: $scope,
+    animation: 'fade',
+    focusFirstInput: false
+  });
+
+
+  $scope.showModalPrint = function(){
+    $scope.thanks = false;
+    $scope.isPrinting = false;
+    $scope.isPrintingWithoutThanks = true;
+    $scope.modal_print.show();
+    setTimeout(function(){
+      $scope.modal_print.hide();
+    }, 2000)
+  }
+
+
 })
