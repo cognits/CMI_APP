@@ -9,8 +9,7 @@
 }
 
 .foodContainer>div {
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
 }
 
 .boxFoodContainer{
@@ -102,6 +101,11 @@
 }
 
 @media screen and (max-height: 600px) {
+  .boxFoodContainer{
+    display: block;
+    text-align: -webkit-center;
+  }
+
   .boxFood{
     padding: 20px 0;
   }

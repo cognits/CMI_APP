@@ -6,7 +6,7 @@
     background-size: cover;
   background-position: 0;
   height: 100%;
-  min-height: 100% !important;
+  min-height: 50% !important;
 }
 
 .searchContainer>div {
@@ -21,22 +21,17 @@
   justify-content: center;
 }
 
+.inputSearchContainerTop{
+  height: 20% !important;
+}
+
 .inputSearchYourName{
   color: #fff !important;
   background-color: transparent;
   font-size: 5rem !important;
-  /*position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;*/
   width: 80%;
   margin: auto;
   height: 106px !important;
-}
-
-.inputSearchYourNameTop{
-  height: 20% !important;
 }
 
 .inputSearchYourName::-webkit-input-placeholder{

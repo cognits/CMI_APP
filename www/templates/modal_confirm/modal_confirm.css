@@ -84,8 +84,12 @@
 }
 
 @media screen and (max-height: 600px) {
+  /*.contentModalConfirm{
+    width: 100%;
+  }*/
+
   .button.button-stable, .button.button-dark{
-    padding: 0px 15px;
+    padding: 0px 15px !important;
   }
 
 }

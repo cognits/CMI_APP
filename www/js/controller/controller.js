@@ -16,7 +16,13 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
 		console.info($scope.objeInvitados);
 	})
   $scope.clickInput = function(){
-    $scope.classInput = "inputSearchYourNameTop"
+    $scope.isEmpty = document.getElementById("inputSearch").value;
+    if ($scope.isEmpty != "") {
+      $scope.classInput = "inputSearchContainerTop"
+    }
+    else {
+      $scope.classInput = "inputSearchContainer"
+    }
   }
 
   $scope.leaveInput = function(){
@@ -81,6 +87,7 @@ app.controller("info_userCtrl", function($scope, $state, $ionicModal){
     $scope.tableChoose = tableChoose;
     $scope.info = info;
     $scope.editInfo = editInfo;
+    window.scrollTo(0,0);
   }
 
   $scope.clickBack = function(){
