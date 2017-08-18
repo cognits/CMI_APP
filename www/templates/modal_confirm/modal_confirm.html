@@ -5,11 +5,11 @@
 
       <div class="contentConfirm">
         <p class="confirmYourSelectionText">Confirma tu selección</p>
-        <p class="userNameText">Daniel Ortega</p>
-        <p class="employmentText">CMI Corporativo</p>
+        <p class="userNameText">{{selectObj.Nombre}}</p>
+        <p class="employmentText">{{selectObj.NombreUnidad}}</p>
         <div class="buttonsContainer">
-          <button class="buttonCancel button button-stable" ng-click="modal.hide()">Cancelar</button>
-          <button class="buttonConfirm button button-dark" ng-click="modal.hide()" ui-sref="food">Confirmar</button>
+          <button class="buttonCancel button button-stable" ng-click="modal_confirm.hide()">Cancelar</button>
+          <button class="buttonConfirm button button-dark" ng-click="confirmRegister()" ui-sref="food">Confirmar</button>
         </div>
       </div>
 

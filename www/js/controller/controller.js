@@ -11,6 +11,7 @@ var CMI = firebase.initializeApp(config);
 // alert($(window).height())
 app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $state){
 	var ref = CMI.database().ref('Invitados');
+  $scope.selectObj={};
   $scope.objeInvitados = $firebaseArray(ref);
 	$scope.objeInvitados.$loaded(function() {
 		console.info($scope.objeInvitados);
@@ -29,18 +30,27 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
     console.log("baja");
     $scope.classInput = "inputSearchYourName"
   }
-
-  $scope.selectItem = function(item) {
-		console.log(item)
-    $scope.modal_confirm.show();
-	}
-
   $ionicModal.fromTemplateUrl('templates/modal_confirm/modal_confirm.html', function(modal) {
     $scope.modal_confirm = modal;
   }, {
+      scope: $scope,
     animation: 'slide-in-up',
     focusFirstInput: false
   });
+  $scope.selectItem = function(item) {
+		$scope.selectObj = item;
+    console.info($scope.selectObj)
+    $scope.modal_confirm.show();
+	}
+  $scope.confirmRegister = function () {
+    angular.forEach($scope.objeInvitados, function(value, key){
+      if (value.Nombre == $scope.selectObj.Nombre) {
+        value.Registro = "Si";
+        $scope.objeInvitados.$save(value);
+      }
+    });
+    $scope.modal_confirm.hide()
+  }
 })
 
 
