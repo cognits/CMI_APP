@@ -39,7 +39,6 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
   });
   $scope.selectItem = function(item) {
 		$rootScope.selectObj = item;
-    console.info($rootScope.selectObj)
     $scope.modal_confirm.show();
 	}
   $scope.confirmRegister = function () {
@@ -55,30 +54,24 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
 
 
 app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state , $rootScope){
-  //$scope.selectInfo = $rootScope.$root.selectObj;
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
     $rootScope.$root.selectObj.Almuerzo = "Si"
-    console.info($rootScope.$root.selectObj)
   }
 
   $scope.checkNo = function() {
     $scope.selectYes = "unchecked"
     $scope.selectNo = "checked"
     $rootScope.$root.selectObj.Almuerzo = "No"
-    console.info($rootScope.$root.selectObj)
   }
   $scope.saveLunch = function () {
-    console.info($rootScope.$root.selectObj.Almuerzo )
     var ref = CMI.database().ref('Invitados');
     $scope.objeInvitados = $firebaseArray(ref);
   	$scope.objeInvitados.$loaded(function() {
       angular.forEach($scope.objeInvitados, function(value, key){
         if (value.Nombre == $rootScope.$root.selectObj.Nombre) {
-          console.info(value);
           value.Almuerzo = $rootScope.$root.selectObj.Almuerzo;
-
           $scope.objeInvitados.$save(value);
         }
       });

@@ -6,7 +6,7 @@
       </div>
       <div class="containerTexIsPrinting">
         <div>
-          <p class="ThanksText" ng-if="thanks">¡Gracias <span>Daniel</span>!</p>
+          <p class="ThanksText" ng-if="thanks">¡Gracias <span>{{$root.selectObj.Nombre}}</span>!</p>
           <p class="YourCarneIsPrintingText" ng-if="isPrinting">Tu carné se está imprimiendo</p>
 
           <p class="ThanksText" ng-if="isPrintingWithoutThanks">¡El carné se está imprimiendo!</p>

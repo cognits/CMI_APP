@@ -14,13 +14,13 @@
           <table class="tableSearch">
          		<tbody>
          			<tr ng-repeat = "dato in objeInvitados | filter: search "  ng-click = "selectItem(dato)">
-         				<td>
+         				<td ng-if="dato.Registro === 'No'">
         	 					{{dato.Nombre }}
          				</td>
-                <td>
+                <td ng-if="dato.Registro === 'No'">
         	 					{{dato.NombreUnidad}}
          				</td>
-                <td ng-click = "selectItem(dato)">
+                <td ng-click = "selectItem(dato)" ng-if="dato.Registro === 'No'">
         	 					<img src="img/arrow_right.png" alt="" style="width:30px; height: 30px;">
          				</td>
 
