@@ -54,17 +54,36 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
 })
 
 
-app.controller("foodCtrl", function($scope, $ionicModal, $state , $rootScope){
-  $scope.global = $rootScope;
-  console.info($scope.global)
+app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state , $rootScope){
+  //$scope.selectInfo = $rootScope.$root.selectObj;
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
+    $rootScope.$root.selectObj.Almuerzo = "Si"
+    console.info($rootScope.$root.selectObj)
   }
 
   $scope.checkNo = function() {
     $scope.selectYes = "unchecked"
     $scope.selectNo = "checked"
+    $rootScope.$root.selectObj.Almuerzo = "No"
+    console.info($rootScope.$root.selectObj)
+  }
+  $scope.saveLunch = function () {
+    console.info($rootScope.$root.selectObj.Almuerzo )
+    var ref = CMI.database().ref('Invitados');
+    $scope.objeInvitados = $firebaseArray(ref);
+  	$scope.objeInvitados.$loaded(function() {
+      angular.forEach($scope.objeInvitados, function(value, key){
+        if (value.Nombre == $rootScope.$root.selectObj.Nombre) {
+          console.info(value);
+          value.Almuerzo = $rootScope.$root.selectObj.Almuerzo;
+
+          $scope.objeInvitados.$save(value);
+        }
+      });
+  	})
+    $scope.showModalPrint();
   }
 
   $ionicModal.fromTemplateUrl('templates/modal_print/modal_print.html', function(modal) {
