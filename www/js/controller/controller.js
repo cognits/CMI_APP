@@ -9,9 +9,9 @@ var config = {
 var CMI = firebase.initializeApp(config);
 
 // alert($(window).height())
-app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $state){
+app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $state , $rootScope){
 	var ref = CMI.database().ref('Invitados');
-  $scope.selectObj={};
+  $rootScope.selectObj={};
   $scope.objeInvitados = $firebaseArray(ref);
 	$scope.objeInvitados.$loaded(function() {
 		console.info($scope.objeInvitados);
@@ -38,8 +38,8 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
     focusFirstInput: false
   });
   $scope.selectItem = function(item) {
-		$scope.selectObj = item;
-    console.info($scope.selectObj)
+		$rootScope.selectObj = item;
+    console.info($rootScope.selectObj)
     $scope.modal_confirm.show();
 	}
   $scope.confirmRegister = function () {
@@ -54,8 +54,9 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
 })
 
 
-app.controller("foodCtrl", function($scope, $ionicModal, $state){
-
+app.controller("foodCtrl", function($scope, $ionicModal, $state , $rootScope){
+  $scope.global = $rootScope;
+  console.info($scope.global)
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
