@@ -102,10 +102,12 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
 
 })
 
-app.controller("info_userCtrl", function($scope, $state, $ionicModal){
+app.controller("info_userCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
+  $scope.nameUser = "";
   $scope.tableChoose = true;
   $scope.info = false;
   $scope.editInfo = false;
+  $scope.infoUser = {};
   $scope.clickInfo = function(tableChoose, info, editInfo){
     $scope.tableChoose = tableChoose;
     $scope.info = info;
@@ -162,6 +164,18 @@ app.controller("info_userCtrl", function($scope, $state, $ionicModal){
       $scope.modal_print.hide();
     }, 2000)
   }
+  var ref = CMI.database().ref('Invitados');
+  $scope.objeInvitados = $firebaseArray(ref);
+  $scope.objeInvitados.$loaded(function() {
+    console.info($scope.objeInvitados);
+  })
 
+})
+app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
+
+  $scope.sendName = function (name) {
+    $rootScope.nameUser = name;
+      console.info($rootScope.nameUser)
+  }
 
 })

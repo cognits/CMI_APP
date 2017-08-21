@@ -67,6 +67,7 @@ var app = angular.module('starter', ['ionic' , 'firebase'])
   .state('insert_name', {
     url: '/insert_name',
     templateUrl: 'templates/insert_name/insert_name.html',
+    controller: "insert_nameCtrl"
   })
 
   .state('info_user', {
@@ -74,6 +75,8 @@ var app = angular.module('starter', ['ionic' , 'firebase'])
     templateUrl: 'templates/info_user/info_user.html',
     controller: "info_userCtrl"
   })
+
+
 
 
 

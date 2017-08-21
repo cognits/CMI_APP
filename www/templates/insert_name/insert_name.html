@@ -8,8 +8,8 @@
         </div>
         <div class="inputInsertNameContainer"  ng-class="classInput">
           <div class="">
-            <input type="text" placeholder="Ingresa el nombre" class="inputInsertName">
-            <button type="button" class="buttonSearch button button-dark" ui-sref="info_user">Buscar</button>
+            <input type="text" placeholder="Ingresa el nombre" class="inputInsertName" ng-model="name">
+            <button type="button" class="buttonSearch button button-dark" ui-sref="info_user" ng-click="sendName(name)">Buscar</button>
           </div>
 
         </div>

@@ -4,7 +4,7 @@
 
         <div class="containerInputToSearch">
           <div class="">
-            <input type="text" class="inputToSearch">
+            <input type="text" class="inputToSearch" ng-model="inputToSearch">
             <button type="button" class="buttonSearch button button-dark" ui-sref="info_user">Buscar</button>
             <img class="imgArrowLeft" src="img/arrow_right.png" alt="Regresar" ng-click="clickBack()">
             <hr class="hrLine">
@@ -17,12 +17,12 @@
 
               <table class="tableChooseName" ng-if="tableChoose">
              		<tbody>
-             			<tr ng-click="clickInfo(false, true, false)">
+             			<tr ng-repeat = "dato in objeInvitados| filter: $root.nameUser | filter:inputToSearch" ng-click="clickInfo(false, true, false)">
              				<td>
-            	 					Daniel Ortega
+            	 					{{dato.Nombre}}
              				</td>
                     <td>
-            	 					Cargo
+            	 					{{dato.NombreUnidad}}
              				</td>
                     <td>
             	 					<img class="imgArrowRight" src="img/arrow_right.png" alt="Siguiente">
