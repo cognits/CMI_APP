@@ -17,7 +17,7 @@
 
               <table class="tableChooseName" ng-if="tableChoose">
              		<tbody>
-             			<tr ng-repeat = "dato in objeInvitados| filter: $root.nameUser | filter:inputToSearch" ng-click="clickInfo(false, true, false)">
+             			<tr ng-repeat = "dato in objeInvitados| filter: $root.nameUser | filter:inputToSearch" ng-click="clickInfo(false, true, false,dato)">
              				<td>
             	 					{{dato.Nombre}}
              				</td>
@@ -36,31 +36,31 @@
                 <div class="row">
                   <div class="col">
                     <p class="nameText">Nombre</p>
-                    <input class="nameUser" value="Daniel Ortega" readonly>
+                    <input class="nameUser" value="{{selectedInfo.Nombre}}" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col col-45">
                     <p class="nameText">Unidad</p>
-                    <input class="grayTextInfoUser" value="CMI Corporativo" readonly>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.NombreUnidad}}" readonly>
                   </div>
                   <div class="col col-45">
                     <p class="nameText">Correo</p>
-                    <input class="grayTextInfoUser" value="dan.ortega@cmi.co" readonly>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.Email}}" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-60">
                     <p class="nameText">Comida en el evento</p>
-                    <input class="grayTextInfoUser" value="Sí" readonly>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.Almuerzo}}" readonly>
                   </div>
 
 
                 </div>
                 <div class="row containerButtons">
-                  <button ng-click="clickInfo(false, false, true)" class="buttonEdit button button-light">Editar</button>
+                  <button ng-click="clickEditInfo(false, false, true )" class="buttonEdit button button-light">Editar</button>
                   <button class="buttonPrint button button-dark" ng-click="showModalPrint()">Imprimir</button>
                 </div>
               </div>
@@ -69,18 +69,18 @@
                 <div class="row">
                   <div class="col">
                     <p class="nameText">Nombre</p>
-                    <input class="nameUser" value="Daniel Ortega">
+                    <input class="nameUser" ng-model="Nombre">
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col col-45">
                     <p class="nameText">Unidad</p>
-                    <input class="grayTextInfoUser" value="CMI Corporativo">
+                    <input class="grayTextInfoUser" ng-model="NombreUnidad">
                   </div>
                   <div class="col col-45">
                     <p class="nameText">Correo</p>
-                    <input class="grayTextInfoUser" value="dan.ortega@cmi.co">
+                    <input class="grayTextInfoUser"ng-model="Email" >
                   </div>
                 </div>
 
@@ -103,8 +103,8 @@
                 </div>
 
                 <div class="row containerButtons">
-                  <button ng-click="clickInfo(false, true, false)" class="buttonCancel button button-stable">Cancelar</button>
-                  <button ng-click="clickInfo(false, true, false)" class="buttonPrint button button-dark">Guardar</button>
+                  <button ng-click="cancelInfo(false, true, false)" class="buttonCancel button button-stable">Cancelar</button>
+                  <button ng-click="saveInfo(false, true, false)" class="buttonPrint button button-dark">Guardar</button>
                 </div>
               </div>
           </div>
