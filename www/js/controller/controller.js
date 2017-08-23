@@ -7,16 +7,27 @@ var config = {
     messagingSenderId: "970565718586"
   };
 var CMI = firebase.initializeApp(config);
-
 // alert($(window).height())
-app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $state , $rootScope){
-	var ref = CMI.database().ref('Invitados');
-  $rootScope.selectObj={};
-  $scope.objeInvitados = $firebaseArray(ref);
-	$scope.objeInvitados.$loaded(function() {
-		console.info($scope.objeInvitados);
-	})
-  $scope.clickInput = function(){
+app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
+  var ref = CMI.database().ref('Invitados');
+  $rootScope.objeInvitados = $firebaseArray(ref);
+  $scope.search = "";
+  $scope.$root.objeInvitados.$loaded(function() {
+    $scope.filterObj = function (model) {
+        if(model != "" && model.length > 2){
+          $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
+           if (obj.Nombre.match(new RegExp('(' + model + ')', 'i'))) {
+             return true;
+           } else {
+             return false;
+           }
+          });
+        }
+    }
+  })
+  //$scope.saveObj.$save(value);
+
+  $scope.clickInput = function(model){
     $scope.isEmpty = document.getElementById("inputSearch").value;
     if ($scope.isEmpty != "") {
       $scope.classInput = "inputSearchContainerTop"
@@ -24,6 +35,7 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
     else {
       $scope.classInput = "inputSearchContainer"
     }
+      $scope.filterObj(model);
   }
 
   $scope.leaveInput = function(){
@@ -42,12 +54,13 @@ app.controller("searchCtrl", function($scope, $firebaseArray, $ionicModal, $stat
     $scope.modal_confirm.show();
 	}
   $scope.confirmRegister = function () {
-    angular.forEach($scope.objeInvitados, function(value, key){
-      if (value.Nombre == $scope.selectObj.Nombre) {
+    angular.forEach($scope.objeInvitados, function(value){
+      if (value.Nombre == $rootScope.$root.selectObj.Nombre) {
         value.Registro = "Si";
         $scope.objeInvitados.$save(value);
       }
     });
+    $(".inputSearchYourName").val("")
     $scope.modal_confirm.hide()
   }
 })
@@ -66,10 +79,8 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
     $rootScope.$root.selectObj.Almuerzo = "No"
   }
   $scope.saveLunch = function () {
-    var ref = CMI.database().ref('Invitados');
-    $scope.objeInvitados = $firebaseArray(ref);
-  	$scope.objeInvitados.$loaded(function() {
-      angular.forEach($scope.objeInvitados, function(value, key){
+  	$scope.$root.objeInvitados.$loaded(function() {
+      angular.forEach($scope.$root.objeInvitados, function(value, key){
         if (value.Nombre == $rootScope.$root.selectObj.Nombre) {
           value.Almuerzo = $rootScope.$root.selectObj.Almuerzo;
           $scope.objeInvitados.$save(value);
@@ -102,18 +113,48 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
 
 })
 
-app.controller("info_userCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
+app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
   $scope.nameUser = "";
   $scope.tableChoose = true;
   $scope.info = false;
   $scope.editInfo = false;
   $scope.infoUser = {};
   $scope.selectedInfo = {};
-  var ref = CMI.database().ref('Invitados');
-  $scope.objeInvitados = $firebaseArray(ref);
-  $scope.objeInvitados.$loaded(function() {
-    console.info($scope.objeInvitados);
-  })
+  $scope.selectInfo2 = {};
+  if($scope.$root.objeInvitados === undefined){
+    var ref = CMI.database().ref('Invitados');
+    $rootScope.objeInvitados = $firebaseArray(ref);
+    $scope.$root.objeInvitados.$loaded(function() {
+      $scope.saveInfo = function(tableChoose, info, editInfo){
+        $scope.tableChoose = tableChoose;
+        $scope.info = info;
+        $scope.editInfo = editInfo;
+        window.scrollTo(0,0);
+        $rootScope.objeInvitados.$save($scope.selectedInfo)
+      }
+    })
+  }else {
+    $scope.$root.objeInvitados.$loaded(function() {
+      angular.copy($scope.selectedInfo ,$scope.selectInfo2  )
+      $scope.saveInfo = function(tableChoose, info, editInfo){
+        $scope.tableChoose = tableChoose;
+        $scope.info = info;
+        $scope.editInfo = editInfo;
+        window.scrollTo(0,0);
+        $rootScope.objeInvitados.$save($scope.selectedInfo)
+        //d$scope.selectedInfo = clickedInfo;
+      }
+    })
+  }
+  $scope.filterObj = function (model) {
+    if(model != "" && model.length > 2){
+      $scope.$root.nameUser = model
+    }
+    if(model.length == 0){
+        $scope.$root.nameUser = "";
+    }
+
+  }
 
   $scope.clickInfo = function(tableChoose, info, editInfo , clickedInfo){
     $scope.tableChoose = tableChoose;
@@ -121,6 +162,7 @@ app.controller("info_userCtrl", function($scope,  $firebaseArray, $state, $ionic
     $scope.editInfo = editInfo;
     window.scrollTo(0,0);
     $scope.selectedInfo = clickedInfo;
+    angular.copy($scope.selectedInfo ,$scope.selectInfo2  )
   }
   $scope.clickEditInfo = function(tableChoose, info, editInfo){
     $scope.tableChoose = tableChoose;
@@ -137,36 +179,20 @@ app.controller("info_userCtrl", function($scope,  $firebaseArray, $state, $ionic
     })
     //d$scope.selectedInfo = clickedInfo;
   }
-  $scope.saveInfo = function(tableChoose, info, editInfo){
-    $scope.tableChoose = tableChoose;
-    $scope.info = info;
-    $scope.editInfo = editInfo;
-    window.scrollTo(0,0);
-    _.forEach($scope.objeInvitados , function (value) {
-      if (value.Nombre ===   $scope.selectedInfo.Nombre) {
-        value =   $scope.selectedInfo;
-        $scope.objeInvitados.$save(value);
-      }
-    })
-    $scope.objeInvitados.$save()
-    //d$scope.selectedInfo = clickedInfo;
-  }
+
   $scope.cancelInfo = function(tableChoose, info, editInfo){
     $scope.tableChoose = tableChoose;
     $scope.info = info;
     $scope.editInfo = editInfo;
     window.scrollTo(0,0);
-    if ($scope.selectedInfo.Nombre != $scope.Nombre || $scope.selectedInfo.NombreUnidad != $scope.NombreUnidad ||  $scope.selectedInfo.Email != $scope.Email|| $scope.selectedInfo.Almuerzo != $scope.Almuerzo) {
-      $scope.Nombre = $scope.selectedInfo.Nombre
-      $scope.NombreUnidad = $scope.selectedInfo.NombreUnidad
-      $scope.Email = $scope.selectedInfo.Email
+      $scope.selectedInfo.Nombre = $scope.selectInfo2.Nombre
+      $scope.selectedInfo.NombreUnidad = $scope.selectInfo2.NombreUnidad
+      $scope.selectedInfo.Email = $scope.selectInfo2.Email
       if ($scope.selectedInfo.Almuerzo === "Si") {
         $scope.checkNo()
       }else if ($scope.selectedInfo.Almuerzo === "No") {
         $scope.checkYes();
       }
-    }
-
   }
   $scope.clickBack = function(){
     if ($scope.tableChoose == true) {
@@ -192,14 +218,12 @@ app.controller("info_userCtrl", function($scope,  $firebaseArray, $state, $ionic
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
     $scope.selectedInfo.Almuerzo = "Si";
-    console.info($scope.selectedInfo)
   }
 
   $scope.checkNo = function() {
     $scope.selectYes = "unchecked"
     $scope.selectNo = "checked"
     $scope.selectedInfo.Almuerzo = "No"
-    console.info($scope.selectedInfo)
   }
 
 
@@ -227,7 +251,6 @@ app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ion
 
   $scope.sendName = function (name) {
     $rootScope.nameUser = name;
-      console.info($rootScope.nameUser)
   }
 
 })

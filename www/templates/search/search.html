@@ -6,14 +6,14 @@
           <img src="img/whitelogolarge.png" alt="Innovation">
         </div>
         <div class="inputSearchContainer"  ng-class="classInput">
-          <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-change="clickInput()" ng-model = 'search'>
+          <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-change="clickInput(search)" ng-model = 'search'>
         </div>
         <div class="tableContainer"  ng-if='search != null && search.length != 0'>
 
 
           <table class="tableSearch">
          		<tbody>
-         			<tr ng-repeat = "dato in objeInvitados | filter: search "  ng-click = "selectItem(dato)">
+         			<tr ng-repeat = " (key,dato) in objFiltered "  ng-click = "selectItem(dato)">
          				<td ng-if="dato.Registro === 'No'">
         	 					{{dato.Nombre }}
          				</td>
