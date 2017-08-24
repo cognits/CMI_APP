@@ -8,10 +8,11 @@ var config = {
   };
 var CMI = firebase.initializeApp(config);
 // alert($(window).height())
-app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
+app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope, sendPrint){
   var ref = CMI.database().ref('Invitados');
   $rootScope.objeInvitados = $firebaseArray(ref);
   $scope.search = "";
+
   $scope.$root.objeInvitados.$loaded(function() {
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
@@ -42,17 +43,20 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     console.log("baja");
     $scope.classInput = "inputSearchYourName"
   }
+
   $ionicModal.fromTemplateUrl('templates/modal_confirm/modal_confirm.html', function(modal) {
     $scope.modal_confirm = modal;
-  }, {
+    }, {
       scope: $scope,
     animation: 'slide-in-up',
     focusFirstInput: false
   });
+
   $scope.selectItem = function(item) {
 		$rootScope.selectObj = item;
     $scope.modal_confirm.show();
 	}
+
   $scope.confirmRegister = function () {
     angular.forEach($scope.objeInvitados, function(value){
       if (value.Nombre == $rootScope.$root.selectObj.Nombre) {
@@ -60,13 +64,19 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
         $scope.objeInvitados.$save(value);
       }
     });
-    $(".inputSearchYourName").val("")
-    $scope.modal_confirm.hide()
+    $(".inputSearchYourName").val("");
+    $scope.modal_confirm.hide();
   }
+
+  $scope.printNameTag = function() {
+    alert("printNameTag");
+    $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+  };
+
 })
 
 
-app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state , $rootScope){
+app.controller("foodCtrl", function($scope, $firebaseArray, $ionicModal, $state , $rootScope, sendPrint){
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
@@ -78,6 +88,7 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
     $scope.selectNo = "checked"
     $rootScope.$root.selectObj.Almuerzo = "No"
   }
+
   $scope.saveLunch = function () {
   	$scope.$root.objeInvitados.$loaded(function() {
       angular.forEach($scope.$root.objeInvitados, function(value, key){
@@ -92,13 +103,11 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
 
   $ionicModal.fromTemplateUrl('templates/modal_print/modal_print.html', function(modal) {
     $scope.modal_print = modal;
-  }, {
+    }, {
     scope: $scope,
     animation: 'fade',
     focusFirstInput: false
-  });
-
-
+  })
 
   $scope.showModalPrint = function(){
     $scope.thanks = true;
@@ -111,6 +120,10 @@ app.controller("foodCtrl", function($scope, $firebaseArray,$ionicModal, $state ,
     }, 2000)
   }
 
+  $scope.printNameTag = function() {
+    alert("printNameTag");
+    $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+  };
 })
 
 app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
