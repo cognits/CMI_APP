@@ -1,27 +1,29 @@
 <ion-view>
 
     <ion-content class="searchContainer">
-
-        <div class="logoContainer">
-          <img src="" alt="Innovation">
+        <div id="logoContentId" class="logoContainer" ng-if="logoContent">
+          <button class="button buttonPrintRecords" ng-click="printNameTag()">
+             Print Records
+          </button>
+          <img src="img/whitelogolarge.png" alt="Innovation">
         </div>
         <div class="inputSearchContainer"  ng-class="classInput">
-          <input type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-click="clickInput()" ng-model = 'search'>
+          <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-change="clickInput(search)" ng-model = 'search'>
         </div>
         <div class="tableContainer"  ng-if='search != null && search.length != 0'>
 
 
           <table class="tableSearch">
          		<tbody>
-         			<tr ng-repeat = "dato in objeInvitados | filter: search "  ng-click = "selectItem(dato)">
-         				<td>
+         			<tr ng-repeat = " (key,dato) in objFiltered "  ng-click = "selectItem(dato)">
+         				<td ng-if="dato.Registro === 'No'">
         	 					{{dato.Nombre }}
          				</td>
-                <td>
-        	 					Cargo
+                <td ng-if="dato.Registro === 'No'">
+        	 					{{dato.NombreUnidad}}
          				</td>
-                <td ng-click = "selectItem(dato)">
-        	 					<img src="" alt="" style="width:30px; height: 30px;">
+                <td ng-click = "selectItem(dato)" ng-if="dato.Registro === 'No'">
+        	 					<img src="img/arrow_right.png" alt="" style="width:30px; height: 30px;">
          				</td>
 
          			</tr>

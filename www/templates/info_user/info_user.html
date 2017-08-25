@@ -1,0 +1,117 @@
+<ion-view>
+
+    <ion-content class="infoUsereContainer">
+
+        <div class="containerInputToSearch">
+          <div class="">
+            <input type="text" class="inputToSearch" ng-model="inputToSearch" ng-change="filterObj(inputToSearch)">
+            <button type="button" class="buttonSearch button button-dark" ui-sref="info_user">Buscar</button>
+            <img class="imgArrowLeft" src="img/arrow_right.png" alt="Regresar" ng-click="clickBack()">
+            <hr class="hrLine">
+          </div>
+        </div>
+
+        <div class="containerBoxWhite">
+          <div class="boxWhite">
+
+
+              <table class="tableChooseName" ng-if="tableChoose">
+             		<tbody>
+             			<tr ng-repeat = "dato in $root.objeInvitados| filter: $root.nameUser" ng-click="clickInfo(false, true, false,dato)">
+             				<td>
+            	 					{{dato.Nombre}}
+             				</td>
+                    <td>
+            	 					{{dato.NombreUnidad}}
+             				</td>
+                    <td>
+            	 					<img class="imgArrowRight" src="img/arrow_right.png" alt="Siguiente">
+             				</td>
+
+             			</tr>
+             		</tbody>
+             	</table>
+
+              <div class="containerInfo" ng-if="info">
+                <div class="row">
+                  <div class="col">
+                    <p class="nameText">Nombre</p>
+                    <input class="nameUser" value="{{selectedInfo.Nombre}}" readonly>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-45">
+                    <p class="nameText">Unidad</p>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.NombreUnidad}}" readonly>
+                  </div>
+                  <div class="col col-45">
+                    <p class="nameText">Correo</p>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.Email}}" readonly>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-60">
+                    <p class="nameText">Comida en el evento</p>
+                    <input class="grayTextInfoUser" value="{{selectedInfo.Almuerzo}}" readonly>
+                  </div>
+
+
+                </div>
+                <div class="row containerButtons">
+                  <button ng-click="clickEditInfo(false, false, true )" class="buttonEdit button button-light">Editar</button>
+                  <button class="buttonPrint button button-dark" ng-click="showModalPrint()">Imprimir</button>
+                </div>
+              </div>
+
+              <div class="containerEditInfo" ng-if="editInfo">
+                <div class="row">
+                  <div class="col">
+                    <p class="nameText">Nombre</p>
+                    <input class="nameUser" ng-model="selectedInfo.Nombre">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-45">
+                    <p class="nameText">Unidad</p>
+                    <input class="grayTextInfoUser" ng-model="selectedInfo.NombreUnidad">
+                  </div>
+                  <div class="col col-45">
+                    <p class="nameText">Correo</p>
+                    <input class="grayTextInfoUser"ng-model="selectedInfo.Email" >
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-60">
+                    <p class="nameText">Comida en el evento</p>
+
+                    <div class="checkRadioContainerEdit">
+                      <div>
+                        <button class="unchecked" ng-class="selectYes" ng-click="checkYes()"></button>
+                        <span>Si</span>
+                      </div>
+                      <div>
+                        <button class="unchecked" ng-class="selectNo" ng-click="checkNo()"></button>
+                        <span>No</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row containerButtons">
+                  <button ng-click="cancelInfo(false, true, false)" class="buttonCancel button button-stable">Cancelar</button>
+                  <button ng-click="saveInfo(false, true, false)" class="buttonPrint button button-dark">Guardar</button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+    </ion-content>
+
+
+</ion-view>

@@ -1,0 +1,47 @@
+.modalPrintContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
+}
+
+.contentModalPrint > div{
+  height: 100%;
+}
+
+.containerTexIsPrinting{
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+}
+
+.ThanksText{
+  font-size: 4rem;
+  font-family: Roboto_Bold;
+  line-height: 1;
+}
+
+.YourCarneIsPrintingText{
+  font-size: 3rem;
+  line-height: 1;
+  /*font-family: Roboto_Bold;*/
+}
+
+@media (min-width: 680px){
+  .modalPrintContainer {
+     top: 0%;
+     right: 0%;
+     bottom: 0%;
+     left: 0%;
+     min-height: 0;
+     width: 100%;
+  }
+}

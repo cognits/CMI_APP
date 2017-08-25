@@ -1,0 +1,73 @@
+.insertNameContainer {
+  background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
+  height: 100%;
+  min-height: 70% !important;
+}
+
+.logoContainer{
+  position: relative;
+}
+
+.insertNameContainer>div {
+  height: 100%;
+}
+
+.buttonLogout {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 54px;
+  font-size: 1.2rem !important;
+}
+
+.inputInsertNameContainer{
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.inputInsertName{
+  color: #fff !important;
+  background-color: transparent;
+  font-size: 5rem !important;
+  width: 80%;
+  margin: auto;
+  height: 106px !important;
+  font-family: Roboto_Bold;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5) !important;
+  text-align: center;
+}
+
+
+.inputInsertName::-webkit-input-placeholder{
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.buttonSearch{
+  margin-top: 20px;
+  padding: 0 !important;
+  width: 130px;
+  height: 65px;
+}
+
+
+
+@media screen and (max-height: 600px) {
+  .inputInsertName{
+    font-size: 4rem !important;
+    height: 70px !important;
+  }
+
+  .button.button-dark{
+    padding: 0px 15px;
+
+}

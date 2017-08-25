@@ -1,0 +1,95 @@
+.modalConfirmContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:transparent;
+}
+
+.contentModalConfirm{
+  position: relative;
+  width: 70%;
+}
+
+.modalConfirm{
+  background-color: #FCFCFB;
+  border-radius: 4px;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #A4A5A8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 30px 0;
+}
+
+.contentConfirm{
+  width: 80%;
+}
+
+.confirmYourSelectionText{
+  color: #9b9b9b;
+  font-family: roboto_bold;
+  font-size: 1rem;
+}
+
+.userNameText{
+  color: #ff9a00;
+  font-family: roboto_bold;
+  margin-top: 30px;
+  font-size: 2rem;
+}
+
+.employmentText{
+  color: #9b9b9b;
+  font-size: 1.5rem;
+}
+
+.buttonsContainer{
+  margin-top: 50px;
+}
+
+.buttonCancel{
+  background-color: transparent;
+  color: #c11010;
+  font-family: roboto_bold;
+  padding: 10px 30px;
+  font-size: 1.3rem;
+}
+
+.button.button-stable{
+  background-color: transparent;
+  color: #c11010;
+  font-family: roboto_bold;
+  padding: 10px 30px;
+  font-size: 1.3rem;
+}
+
+.button.button-stable.active, .button.button-stable.activated {
+  background-color: transparent;
+  color: #9d0c0c;
+  border-color: transparent;
+}
+
+.button.button-dark{
+  background-color: #54585A;
+  color: #fff;
+  font-family: roboto_bold;
+  padding: 10px 30px;
+  font-size: 1.3rem;
+}
+
+.button.button-dark.active, .button.button-dark.activated{
+  background-color: #484c4e;
+}
+
+@media screen and (max-height: 600px) {
+  /*.contentModalConfirm{
+    width: 100%;
+  }*/
+
+  .button.button-stable, .button.button-dark{
+    padding: 0px 15px !important;
+  }
+
+}

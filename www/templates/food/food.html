@@ -1,0 +1,33 @@
+<ion-view>
+
+    <ion-content class="foodContainer">
+
+        <div class="logoContainer">
+          <img src="img/whitelogolarge.png" alt="Innovation">
+        </div>
+
+        <div class="boxFoodContainer">
+          <div class="boxFood">
+            <div class="">
+              <p class="userNameFood">{{$root.selectObj.Nombre}}</p>
+              <p class="grayText">{{$root.selectObj.NombreUnidad}}</p>
+              <p class="grayText">{{$root.selectObj.Email}}</p>
+              <hr class="line">
+              <p class="willEatText">¿Comerás en el evento?</p>
+              <div class="checkRadioContainer">
+                <div class="yesContainer">
+                  <button class="unchecked" ng-class="selectYes" ng-click="checkYes()"></button>
+                  <span>Si</span>
+                </div>
+                <div class="noContainer">
+                  <button class="unchecked" ng-class="selectNo" ng-click="checkNo()"></button>
+                  <span>No</span>
+                </div>
+
+              </div>
+              <button class="buttonConfirm button button-dark" ng-click="saveLunch()">Confirmar</button>
+            </div>
+          </div>
+        </div>
+    </ion-content>
+</ion-view>

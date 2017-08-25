@@ -1,5 +1,38 @@
-/* Empty. Add your own CSS if you like */
+@font-face {
+  font-family: roboto_bold;
+  src: url(typography/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: roboto_Black;
+  src: url(typography/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: roboto_regular;
+  src: url(typography/Roboto-Regular.ttf);
+}
+
+body{
+  font-family: roboto_regular;
+  color: #9b9b9b;
+}
+
 button{
   outline: none;
   border: none;
+}
+
+.active .modal-backdrop-bg {
+    opacity: .7;
+}
+.modal-backdrop-bg {
+  -webkit-transition: opacity 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
+  background-color: #000;
+  opacity: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
 }

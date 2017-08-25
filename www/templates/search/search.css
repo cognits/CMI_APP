@@ -1,11 +1,26 @@
 .searchContainer {
   background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
   height: 100%;
+  min-height: 100% !important;
 }
 
 .searchContainer>div {
   height: 100%;
   overflow: hidden;
+}
+
+.buttonPrintRecords{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 60px;
 }
 
 .inputSearchContainer{
@@ -15,33 +30,42 @@
   justify-content: center;
 }
 
+.inputSearchContainerTop{
+  height: 45% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toAnimateUp{
+  animation-name: animationInputUp;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.toAnimateDown{
+  animation-name: animationInputDown;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animationInputUp {
+  0%{margin-top: 0vh;}
+  100%{margin-top: -25vh;}
+}
+
+@keyframes animationInputDown {
+  0%{margin-top: -25vh;}
+  100%{margin-top: 0vh;}
+}
+
 .inputSearchYourName{
   color: #fff !important;
   background-color: transparent;
   font-size: 5rem !important;
-  /*position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;*/
   width: 80%;
   margin: auto;
   height: 106px !important;
-}
-
-.inputSearchYourNameTop{
-  /*color: #fff !important;
-  background-color: transparent;
-  font-size: 5rem !important;
-  position: absolute;
-  top: 25%;
-  bottom: inherit;
-  left: 0;
-  right: 0;
-  width: 80%;
-  margin: auto;
-  height: 106px !important;*/
-  height: 20% !important;
 }
 
 .inputSearchYourName::-webkit-input-placeholder{
@@ -63,8 +87,29 @@
 }
 
 .tableSearch > tbody > tr > td{
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-bottom: 1px solid gray;
-  padding: 20px;
+  padding: 0 20px;
   color: gray;
+  line-height: 1;
+  font-family: Roboto_Regular;
+  vertical-align: middle;
+  height: 70px;
+}
+
+.tableSearch > tbody > tr > td:nth-child(1){
+  font-family: Roboto_Bold;
+  color: #54585a;
+}
+
+.imgArrowRight{
+  width: 30px;
+  margin-top: 5px;
+}
+
+@media screen and (max-height: 600px) {
+  .inputSearchYourName{
+    font-size: 4rem !important;
+    height: 70px !important;
+  }
 }

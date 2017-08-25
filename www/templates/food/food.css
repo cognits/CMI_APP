@@ -1,0 +1,134 @@
+.foodContainer {
+  background-color: #f5a917;
+  background:  url(../../img/bg_yellow.png) no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  background-position: 0;
+  height: 100%;
+}
+
+.foodContainer>div {
+  min-height: 100%;
+}
+
+.boxFoodContainer{
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxFood{
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  height: auto;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.boxFood > div{
+  width: 60%;
+}
+
+.userNameFood{
+  font-size: 2rem;
+  color: #54585A;
+  font-family: roboto_black;
+}
+
+.grayText{
+  font-size: 1rem;
+  font-family: roboto_bold;
+}
+
+.grayText:nth-child(3){
+  margin-bottom: 30px;
+}
+
+.line{
+  border-top-color: #9b9b9b;
+  opacity: 0.2;
+}
+
+.willEatText{
+  font-size: 1rem;
+  font-family: roboto_bold;
+  margin-top: 30px;
+}
+
+.checkRadioContainer{
+  margin: 50px 0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkRadioContainer > div{
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.checked{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #54585a !important;
+  border: 2px solid #54585a !important;
+  box-shadow: inset 0 0 0px 3px #fff;
+}
+
+.noContainer{
+  justify-content: flex-end;
+}
+
+.unchecked{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #fff;
+  border: 2px solid #54585a;
+}
+
+.checkRadioContainer > div > span{
+  margin-left: 10px
+}
+
+@media screen and (max-height: 600px) {
+  .boxFoodContainer{
+    display: block;
+    text-align: -webkit-center;
+  }
+
+  .boxFood{
+    padding: 20px 0;
+  }
+
+  .userNameFood{
+    font-size: 1.5rem;
+  }
+
+  .grayText{
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .grayText:nth-child(3){
+    margin-bottom: 20px;
+  }
+
+  .willEatText{
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+
+  .checkRadioContainer{
+    margin: 20px 0;
+  }
+}
