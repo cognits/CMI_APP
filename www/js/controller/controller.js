@@ -27,14 +27,21 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     }
   })
   //$scope.saveObj.$save(value);
+  $scope.logoContent = true;
 
   $scope.clickInput = function(model){
     $scope.isEmpty = document.getElementById("inputSearch").value;
     if ($scope.isEmpty != "") {
       $scope.classInput = "inputSearchContainerTop"
+      $("#logoContentId").addClass("toAnimateUp");
+      $("#logoContentId").removeClass("toAnimateDown");
+      // $scope.logoContent = false;
     }
     else {
       $scope.classInput = "inputSearchContainer"
+      $("#logoContentId").removeClass("toAnimateUp");
+      $("#logoContentId").addClass("toAnimateDown");
+      // $scope.logoContent = true;
     }
       $scope.filterObj(model);
   }
