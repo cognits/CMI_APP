@@ -6,12 +6,21 @@
     background-size: cover;
   background-position: 0;
   height: 100%;
-  min-height: 50% !important;
+  min-height: 100% !important;
 }
 
 .searchContainer>div {
   height: 100%;
   overflow: hidden;
+}
+
+.buttonPrintRecords{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 60px;
 }
 
 .inputSearchContainer{
@@ -22,7 +31,32 @@
 }
 
 .inputSearchContainerTop{
-  height: 20% !important;
+  height: 45% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toAnimateUp{
+  animation-name: animationInputUp;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.toAnimateDown{
+  animation-name: animationInputDown;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animationInputUp {
+  0%{margin-top: 0vh;}
+  100%{margin-top: -25vh;}
+}
+
+@keyframes animationInputDown {
+  0%{margin-top: -25vh;}
+  100%{margin-top: 0vh;}
 }
 
 .inputSearchYourName{

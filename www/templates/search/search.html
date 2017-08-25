@@ -1,10 +1,10 @@
 <ion-view>
 
     <ion-content class="searchContainer">
-      <button class="button" ng-click="printNameTag()">
-         Print Records
-      </button>
-        <div class="logoContainer">
+        <div id="logoContentId" class="logoContainer" ng-if="logoContent">
+          <button class="button buttonPrintRecords" ng-click="printNameTag()">
+             Print Records
+          </button>
           <img src="img/whitelogolarge.png" alt="Innovation">
         </div>
         <div class="inputSearchContainer"  ng-class="classInput">

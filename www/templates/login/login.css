@@ -27,14 +27,14 @@
 
 .inputAccessCode{
   background-color: transparent;
-  border-bottom: 1px solid #9b9b9b !important;
+  border-bottom: 1px solid #fff !important;
   width: 100%;
   font-size: 1rem;
-  color: #9b9b9b !important;
+  color: #fff !important;
 }
 
 .inputAccessCode:focus{
-  color: #9b9b9b;
+  color: #fff;
 }
 
 
