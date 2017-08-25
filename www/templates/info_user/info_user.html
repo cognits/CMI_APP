@@ -4,7 +4,7 @@
 
         <div class="containerInputToSearch">
           <div class="">
-            <input type="text" class="inputToSearch" ng-model="inputToSearch" ng-change="filterObj(inputToSearch)">
+            <input id="inputFilter" type="text" class="inputToSearch" ng-model="inputToSearch" ng-change="filterObj(inputToSearch)">
             <button type="button" class="buttonSearch button button-dark" ui-sref="info_user">Buscar</button>
             <img class="imgArrowLeft" src="img/arrow_right.png" alt="Regresar" ng-click="clickBack()">
             <hr class="hrLine">
@@ -69,18 +69,18 @@
                 <div class="row">
                   <div class="col">
                     <p class="nameText">Nombre</p>
-                    <input class="nameUser" ng-model="selectedInfo.Nombre">
+                    <input class="nameUser" ng-model="selectedInfo.Nombre" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col col-45">
                     <p class="nameText">Unidad</p>
-                    <input class="grayTextInfoUser" ng-model="selectedInfo.NombreUnidad">
+                    <input class="grayTextInfoUser" ng-model="selectedInfo.NombreUnidad" readonly>
                   </div>
                   <div class="col col-45">
                     <p class="nameText">Correo</p>
-                    <input class="grayTextInfoUser"ng-model="selectedInfo.Email" >
+                    <input class="grayTextInfoUser"ng-model="selectedInfo.Email" readonly>
                   </div>
                 </div>
 

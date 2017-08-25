@@ -29,6 +29,12 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   //$scope.saveObj.$save(value);
   $scope.logoContent = true;
 
+  $scope.upInput = function(){
+    $scope.classInput = "inputSearchContainerTop"
+    $("#logoContentId").addClass("toAnimateUp");
+    $("#logoContentId").removeClass("toAnimateDown");
+  }
+
   $scope.clickInput = function(model){
     $scope.isEmpty = document.getElementById("inputSearch").value;
     if ($scope.isEmpty != "") {
@@ -41,7 +47,7 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
       $scope.classInput = "inputSearchContainer"
       $("#logoContentId").removeClass("toAnimateUp");
       $("#logoContentId").addClass("toAnimateDown");
-      // $scope.logoContent = true;
+
     }
       $scope.filterObj(model);
   }
@@ -160,6 +166,7 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
         $scope.tableChoose = tableChoose;
         $scope.info = info;
         $scope.editInfo = editInfo;
+        $("#inputFilter").prop('readonly', true);
         window.scrollTo(0,0);
         $rootScope.objeInvitados.$save($scope.selectedInfo)
         //d$scope.selectedInfo = clickedInfo;
@@ -180,6 +187,7 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
     $scope.tableChoose = tableChoose;
     $scope.info = info;
     $scope.editInfo = editInfo;
+    $("#inputFilter").prop('readonly', true);
     window.scrollTo(0,0);
     $scope.selectedInfo = clickedInfo;
     angular.copy($scope.selectedInfo ,$scope.selectInfo2  )
@@ -188,6 +196,7 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
     $scope.tableChoose = tableChoose;
     $scope.info = info;
     $scope.editInfo = editInfo;
+    $("#inputFilter").prop('readonly', true);
     window.scrollTo(0,0);
     $scope.Nombre = $scope.selectedInfo.Nombre;
     $scope.NombreUnidad = $scope.selectedInfo.NombreUnidad;
@@ -204,6 +213,7 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
     $scope.tableChoose = tableChoose;
     $scope.info = info;
     $scope.editInfo = editInfo;
+    $("#inputFilter").prop('readonly', true);
     window.scrollTo(0,0);
       $scope.selectedInfo.Nombre = $scope.selectInfo2.Nombre
       $scope.selectedInfo.NombreUnidad = $scope.selectInfo2.NombreUnidad
@@ -218,6 +228,7 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
     if ($scope.tableChoose == true) {
       $scope.info = false;
       $scope.editInfo = false;
+      $("#inputFilter").prop('readonly', false);
       $state.go("insert_name")
     }
 
@@ -225,12 +236,14 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
       $scope.tableChoose = true;
       $scope.info = false;
       $scope.editInfo = false;
+      $("#inputFilter").prop('readonly', false);
     }
 
     if ($scope.editInfo == true) {
       $scope.tableChoose = false;
       $scope.info = true;
       $scope.editInfo = false;
+      $("#inputFilter").prop('readonly', true);
     }
   }
 
@@ -272,5 +285,29 @@ app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ion
   $scope.sendName = function (name) {
     $rootScope.nameUser = name;
   }
+
+  $scope.upInput = function(){
+    $scope.classInput = "inputSearchContainerTop"
+    $("#logoContentIdInsertNaem").addClass("toAnimateUp");
+    $("#logoContentIdInsertNaem").removeClass("toAnimateDown");
+  }
+
+  $scope.changeInput = function(model){
+    $scope.isEmpty = document.getElementById("inputInsertName").value;
+    if ($scope.isEmpty != "") {
+      $scope.classInput = "inputSearchContainerTop"
+      $("#logoContentIdInsertNaem").addClass("toAnimateUp");
+      $("#logoContentIdInsertNaem").removeClass("toAnimateDown");
+      // $scope.logoContent = false;
+    }
+    else {
+      $scope.classInput = "inputSearchContainer"
+      $("#logoContentIdInsertNaem").removeClass("toAnimateUp");
+      $("#logoContentIdInsertNaem").addClass("toAnimateDown");
+
+    }
+      $scope.filterObj(model);
+  }
+
 
 })
