@@ -70,7 +70,7 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
 
   $scope.printNameTag = function() {
     alert("printNameTag");
-    $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+    $scope.sendPrint = sendPrint.getInfo($rootScope.$root.selectObj);
   };
 
 })
@@ -110,14 +110,20 @@ app.controller("foodCtrl", function($scope, $firebaseArray, $ionicModal, $state 
   })
 
   $scope.showModalPrint = function(){
-    $scope.thanks = true;
-    $scope.isPrinting = true;
-    $scope.isPrintingWithoutThanks = false;
-    $scope.modal_print.show();
-    setTimeout(function(){
-      $scope.modal_print.hide();
-      $state.go("home");
-    }, 2000)
+
+      sendPrint.getInfo($rootScope.$root.selectObj).then(function () {
+        $scope.thanks = true;
+        $scope.isPrinting = true;
+        $scope.isPrintingWithoutThanks = false;
+        $scope.modal_print.show();
+        setTimeout(function(){
+          $scope.modal_print.hide();
+          $state.go("home");
+        }, 2000)
+      })
+
+
+
   }
 
   $scope.printNameTag = function() {
