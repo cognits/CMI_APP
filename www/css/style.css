@@ -36,3 +36,17 @@ button{
 ::-webkit-scrollbar {
     width: 0px;
 }
+
+
+.loading-container .loading{
+  background-color: transparent;
+}
+
+.spinner svg{
+  width: 60px;
+  height: 60px;
+}
+
+.spinner-android{
+  stroke: #ff9A00;
+}
