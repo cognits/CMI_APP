@@ -64,12 +64,14 @@
   background-color: transparent;
   font-size: 5rem !important;
   width: 80%;
-  margin: auto;
-  height: 106px !important;
+  /*margin: auto;*/
+  height: 100% !important;
 }
 
 .inputSearchYourName::-webkit-input-placeholder{
   color: #f2ba4e !important;
+  padding-top: 25px;
+  height: 100%;
 }
 
 .tableContainer{
@@ -110,6 +112,5 @@
 @media screen and (max-height: 600px) {
   .inputSearchYourName{
     font-size: 4rem !important;
-    height: 70px !important;
   }
 }
