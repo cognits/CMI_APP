@@ -5,7 +5,6 @@
         <div class="containerInputToSearch">
           <div class="">
             <input id="inputFilter" type="text" class="inputToSearch" ng-model="inputToSearch" ng-change="filterObj(inputToSearch)">
-            <button type="button" class="buttonSearch button button-dark" ui-sref="info_user">Buscar</button>
             <img class="imgArrowLeft" src="img/arrow_right.png" alt="Regresar" ng-click="clickBack()">
             <hr class="hrLine">
           </div>
@@ -61,7 +60,7 @@
                 </div>
                 <div class="row containerButtons">
                   <button ng-click="clickEditInfo(false, false, true )" class="buttonEdit button button-light">Editar</button>
-                  <button class="buttonPrint button button-dark" ng-click="showModalPrint()">Imprimir</button>
+                  <button class="buttonPrint button button-dark" ng-click="printNameTag(selectedInfo)">Imprimir</button>
                 </div>
               </div>
 
