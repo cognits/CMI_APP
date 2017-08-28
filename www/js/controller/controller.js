@@ -153,8 +153,6 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
   $scope.printNameTag = function(UserData) {
     // alert("printNameTag");
     // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
-    alert("sendPrint service");
-    alert("User Data: " + UserData);
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
                         '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
@@ -181,7 +179,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show({
-         template: 'Loading...',
+        
        }).then(function(){
           console.log("The loading indicator is now displayed");
 
@@ -341,9 +339,6 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
   $scope.printNameTag = function(UserData) {
     // alert("printNameTag");
     // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
-    alert("sendPrint service");
-    alert("User Data: " + UserData);
-    console.info(UserData)
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
                         '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
@@ -370,7 +365,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show({
-         template: 'Loading...',
+
        }).then(function(){
           console.log("The loading indicator is now displayed");
 
