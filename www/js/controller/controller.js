@@ -15,17 +15,15 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   $scope.resumen = {};
   $scope.$root.objeInvitados.$loaded(function() {
       $scope.resumenInvitados = function () {
-        var refResumen = CMI.database().ref('Resumen');
-        $rootScope.objResumen = $firebaseArray(refResumen);
-        console.info($scope.$root.objResumen)
-        $scope.resumen.Asistentes = $scope.$root.objeInvitados.length;
-        $scope.resumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-        $scope.resumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-        $scope.resumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-        console.info($scope.resumen)
-        $scope.$root.objResumen.$save($scope.resumen)
+        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
+        $scope.objResumen = $firebaseObject(refResumen);
+        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
+        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+        $scope.objResumen.$save()
     }
-      $scope.resumenInvitados();
+    $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
           $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
@@ -179,7 +177,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show({
-        
+
        }).then(function(){
           console.log("The loading indicator is now displayed");
 
