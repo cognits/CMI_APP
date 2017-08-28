@@ -198,7 +198,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
   };
 })
 
-app.controller("info_userCtrl", function($scope,$cordovaPrinter,$firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
+app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
   $scope.nameUser = "";
   $scope.tableChoose = true;
   $scope.info = false;
@@ -333,9 +333,9 @@ app.controller("info_userCtrl", function($scope,$cordovaPrinter,$firebaseObject,
     $scope.isPrinting = false;
     $scope.isPrintingWithoutThanks = true;
     $scope.modal_print.show();
-    //setTimeout(function(){
-    //  $scope.modal_print.hide();
-    //}, 2000)
+    setTimeout(function(){
+    $scope.modal_print.hide();
+    }, 2000)
   }
 
   $scope.printNameTag = function(UserData) {
@@ -369,8 +369,16 @@ app.controller("info_userCtrl", function($scope,$cordovaPrinter,$firebaseObject,
 
 
     if($cordovaPrinter.isAvailable()) {
+      $ionicLoading.show({
+         template: 'Loading...',
+       }).then(function(){
+          console.log("The loading indicator is now displayed");
+
+       });
        $cordovaPrinter.print(printText,{duplex: 'none', landscape: false, graystyle: false, border:false}).then(function(res) {
-         $scope.showModalPrint();
+         $ionicLoading.hide().then(function () {
+           $scope.showModalPrint();
+         });
        });
 
     } else {
