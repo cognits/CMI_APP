@@ -8,12 +8,24 @@ var config = {
   };
 var CMI = firebase.initializeApp(config);
 // alert($(window).height())
-app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope, sendPrint){
+app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
   var ref = CMI.database().ref('Invitados');
   $rootScope.objeInvitados = $firebaseArray(ref);
   $scope.search = "";
-
+  $scope.resumen = {};
   $scope.$root.objeInvitados.$loaded(function() {
+      $scope.resumenInvitados = function () {
+        var refResumen = CMI.database().ref('Resumen');
+        $rootScope.objResumen = $firebaseArray(refResumen);
+        console.info($scope.$root.objResumen)
+        $scope.resumen.Asistentes = $scope.$root.objeInvitados.length;
+        $scope.resumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+        $scope.resumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+        $scope.resumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+        console.info($scope.resumen)
+        $scope.$root.objResumen.$save($scope.resumen)
+    }
+      $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
           $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
@@ -83,7 +95,7 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
 })
 
 
-app.controller("foodCtrl", function($scope, $firebaseArray, $ionicModal, $state , $rootScope, sendPrint){
+app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionicModal, $state , $rootScope, $cordovaPrinter){
   $scope.checkYes = function() {
     $scope.selectYes = "checked"
     $scope.selectNo = "unchecked"
@@ -105,7 +117,7 @@ app.controller("foodCtrl", function($scope, $firebaseArray, $ionicModal, $state 
         }
       });
   	})
-    $scope.showModalPrint();
+    $scope.printNameTag($rootScope.$root.selectObj);
   }
 
   $ionicModal.fromTemplateUrl('templates/modal_print/modal_print.html', function(modal) {
@@ -118,28 +130,69 @@ app.controller("foodCtrl", function($scope, $firebaseArray, $ionicModal, $state 
 
   $scope.showModalPrint = function(){
 
-      sendPrint.getInfo($rootScope.$root.selectObj).then(function () {
         $scope.thanks = true;
         $scope.isPrinting = true;
         $scope.isPrintingWithoutThanks = false;
         $scope.modal_print.show();
         setTimeout(function(){
-          $scope.modal_print.hide();
-          $state.go("home");
+           $scope.modal_print.hide();
+         $state.go("home");
         }, 2000)
-      })
-
-
-
+        // setTimeout(function(){
+        //   $scope.modal_print.hide();
+        //   $state.go("home");
+        // }, 2000)
   }
 
-  $scope.printNameTag = function() {
-    alert("printNameTag");
-    $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+  $scope.printNameTag = function(UserData) {
+    // alert("printNameTag");
+    // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+    alert("sendPrint service");
+    alert("User Data: " + UserData);
+    if (UserData.Nombre.length > 10 ) {
+      var printText = '<html style="width:277px; height:390px">'+
+                        '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<br>' +
+                            '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
+                            '<br>' +
+                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
+                        '</p>' +
+                      '</html>'
+    } else {
+      var printText = '<html style="width:277px; height:390px">'+
+                        '<p style="font-size:45px; margin-top:200px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            //'<br>' +
+                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<br>' +
+                            '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
+                            '<br>' +
+                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
+                        '</p>' +
+                      '</html>'
+    }
+
+
+    if($cordovaPrinter.isAvailable()) {
+      $ionicLoading.show({
+         template: 'Loading...',
+       }).then(function(){
+          console.log("The loading indicator is now displayed");
+
+       });
+       $cordovaPrinter.print(printText,{duplex: 'none', landscape: false, graystyle: false, border:false}).then(function(res) {
+          $ionicLoading.hide().then(function () {
+            $scope.showModalPrint();
+          });
+       });
+
+    } else {
+       alert("Printing is not available on device");
+    }
   };
 })
 
-app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
+app.controller("info_userCtrl", function($scope,$cordovaPrinter,$firebaseObject, $firebaseArray, $state, $ionicModal,$rootScope){
   $scope.nameUser = "";
   $scope.tableChoose = true;
   $scope.info = false;
@@ -267,10 +320,50 @@ app.controller("info_userCtrl", function($scope, $firebaseObject, $firebaseArray
     $scope.isPrinting = false;
     $scope.isPrintingWithoutThanks = true;
     $scope.modal_print.show();
-    setTimeout(function(){
-      $scope.modal_print.hide();
-    }, 2000)
+    //setTimeout(function(){
+    //  $scope.modal_print.hide();
+    //}, 2000)
   }
+
+  $scope.printNameTag = function(UserData) {
+    // alert("printNameTag");
+    // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+    alert("sendPrint service");
+    alert("User Data: " + UserData);
+    console.info(UserData)
+    if (UserData.Nombre.length > 10 ) {
+      var printText = '<html style="width:277px; height:390px">'+
+                        '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<br>' +
+                            '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
+                            '<br>' +
+                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
+                        '</p>' +
+                      '</html>'
+    } else {
+      var printText = '<html style="width:277px; height:390px">'+
+                        '<p style="font-size:45px; margin-top:200px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            //'<br>' +
+                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<br>' +
+                            '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
+                            '<br>' +
+                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
+                        '</p>' +
+                      '</html>'
+    }
+
+
+    if($cordovaPrinter.isAvailable()) {
+       $cordovaPrinter.print(printText,{duplex: 'none', landscape: false, graystyle: false, border:false}).then(function(res) {
+         $scope.showModalPrint();
+       });
+
+    } else {
+       alert("Printing is not available on device");
+    }
+  };
 
 })
 app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
