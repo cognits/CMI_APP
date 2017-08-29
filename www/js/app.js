@@ -62,12 +62,13 @@ var app = angular.module('starter', ['ionic' , 'firebase', 'ngCordova'])
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login/login.html',
+    controller: "animateInputCtrl"
   })
 
   .state('insert_name', {
     url: '/insert_name',
     templateUrl: 'templates/insert_name/insert_name.html',
-    controller: "insert_nameCtrl"
+    controller: "insert_nameCtrl",
   })
 
   .state('info_user', {
@@ -82,3 +83,18 @@ var app = angular.module('starter', ['ionic' , 'firebase', 'ngCordova'])
 
   $urlRouterProvider.otherwise('/home');
 })
+
+
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});

@@ -15,15 +15,17 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   $scope.resumen = {};
   $scope.$root.objeInvitados.$loaded(function() {
       $scope.resumenInvitados = function () {
-        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
-        $scope.objResumen = $firebaseObject(refResumen);
-        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
-        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-        $scope.objResumen.$save()
+        var refResumen = CMI.database().ref('Resumen');
+        $rootScope.objResumen = $firebaseArray(refResumen);
+        console.info($scope.$root.objResumen)
+        $scope.resumen.Asistentes = $scope.$root.objeInvitados.length;
+        $scope.resumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+        $scope.resumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+        $scope.resumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+        console.info($scope.resumen)
+        $scope.$root.objResumen.$save($scope.resumen)
     }
-    $scope.resumenInvitados();
+      $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
           $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
@@ -43,6 +45,14 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     $scope.classInput = "inputSearchContainerTop"
     $("#logoContentId").addClass("toAnimateUp");
     $("#logoContentId").removeClass("toAnimateDown");
+  }
+
+  $scope.enterToHide = function(){
+      cordova.plugins.Keyboard.close();
+  }
+
+  $scope.cambiar = function(){
+    console.log("click");
   }
 
   $scope.clickInput = function(model){
@@ -151,6 +161,8 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
   $scope.printNameTag = function(UserData) {
     // alert("printNameTag");
     // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+    alert("sendPrint service");
+    alert("User Data: " + UserData);
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
                         '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
@@ -177,7 +189,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show({
-
+         template: 'Loading...',
        }).then(function(){
           console.log("The loading indicator is now displayed");
 
@@ -337,6 +349,9 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
   $scope.printNameTag = function(UserData) {
     // alert("printNameTag");
     // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
+    alert("sendPrint service");
+    alert("User Data: " + UserData);
+    console.info(UserData)
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
                         '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
@@ -363,7 +378,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show({
-
+         template: 'Loading...',
        }).then(function(){
           console.log("The loading indicator is now displayed");
 
@@ -408,6 +423,16 @@ app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ion
     }
       $scope.filterObj(model);
   }
+})
 
+app.controller("animateInputCtrl", function($scope){
+  $scope.upInput = function(){
+    $("#logoId").addClass("toAnimateUp");
+    $("#logoId").removeClass("toAnimateDown");
+  }
 
+  $scope.downInput = function(){
+    $("#logoId").addClass("toAnimateDown");
+    $("#logoId").removeClass("toAnimateUp");
+  }
 })

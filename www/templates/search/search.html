@@ -5,7 +5,7 @@
           <img src="img/whitelogolarge.png" alt="Innovation">
         </div>
         <div class="inputSearchContainer"  ng-class="classInput">
-          <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-click="upInput()" ng-change="clickInput(search)" ng-model = 'search'>
+          <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-click="upInput()" ng-enter="enterToHide()" ng-change="clickInput(search)" ng-model = 'search'>
         </div>
         <div class="tableContainer"  ng-if='search != null && search.length != 0'>
 

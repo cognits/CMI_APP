@@ -68,7 +68,7 @@
                 <div class="row">
                   <div class="col">
                     <p class="nameText">Nombre</p>
-                    <input class="nameUser" ng-model="selectedInfo.Nombre" readonly>
+                    <input class="nameUser" ng-model="selectedInfo.Nombre">
                   </div>
                 </div>
 
@@ -88,12 +88,12 @@
                     <p class="nameText">Comida en el evento</p>
 
                     <div class="checkRadioContainerEdit">
-                      <div>
-                        <button class="unchecked" ng-class="selectYes" ng-click="checkYes()"></button>
+                      <div ng-click="checkYes()">
+                        <button class="unchecked" ng-class="selectYes"></button>
                         <span>Si</span>
                       </div>
-                      <div>
-                        <button class="unchecked" ng-class="selectNo" ng-click="checkNo()"></button>
+                      <div ng-click="checkNo()">
+                        <button class="unchecked" ng-class="selectNo"></button>
                         <span>No</span>
                       </div>
 

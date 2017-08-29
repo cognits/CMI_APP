@@ -2,12 +2,12 @@
 
     <ion-content class="loginContainer">
 
-        <div class="logoContainer">
+        <div id="logoId" class="logoContainer">
           <img src="img/whitelogolarge.png" alt="Innovation">
         </div>
         <div class="containerInputAccessCode">
           <div class="">
-            <input class="inputAccessCode" type="text" placeholder="Código de acceso">
+            <input class="inputAccessCode" type="text" placeholder="Código de acceso" ng-focus="upInput()" ng-blur="downInput()">
             <button type="button" class="buttonLogin button button-energized" ui-sref="insert_name">Ingresar</button>
           </div>
 

@@ -39,6 +39,7 @@
   font-size: 2rem;
   color: #54585A;
   font-family: roboto_black;
+  line-height: 1;
 }
 
 .grayText{
@@ -72,7 +73,8 @@
 .checkRadioContainer > div{
   display: flex;
   align-items: center;
-  width: 30%;
+  justify-content: center;
+  width: 50%;
 }
 
 .checked{

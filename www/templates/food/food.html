@@ -15,12 +15,12 @@
               <hr class="line">
               <p class="willEatText">¿Comerás en el evento?</p>
               <div class="checkRadioContainer">
-                <div class="yesContainer">
-                  <button class="unchecked" ng-class="selectYes" ng-click="checkYes()"></button>
+                <div class="yesContainer" ng-click="checkYes()">
+                  <button class="unchecked" ng-class="selectYes"></button>
                   <span>Si</span>
                 </div>
-                <div class="noContainer">
-                  <button class="unchecked" ng-class="selectNo" ng-click="checkNo()"></button>
+                <div class="noContainer" ng-click="checkNo()">
+                  <button class="checked" ng-class="selectNo"></button>
                   <span>No</span>
                 </div>
 
