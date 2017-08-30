@@ -7,7 +7,6 @@ var config = {
     messagingSenderId: "970565718586"
   };
 var CMI = firebase.initializeApp(config);
-// alert($(window).height())
 app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
   var ref = CMI.database().ref('Invitados');
   $rootScope.objeInvitados = $firebaseArray(ref);
@@ -102,7 +101,6 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   }
 
   $scope.printNameTag = function() {
-    alert("printNameTag");
     $scope.sendPrint = sendPrint.getInfo($rootScope.$root.selectObj);
   };
 
@@ -159,10 +157,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
   }
 
   $scope.printNameTag = function(UserData) {
-    // alert("printNameTag");
-    // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
-    alert("sendPrint service");
-    alert("User Data: " + UserData);
+
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
                         '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
@@ -201,7 +196,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
        });
 
     } else {
-       alert("Printing is not available on device");
+       console.log("Printing is not available on device");
     }
   };
 })
@@ -347,10 +342,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
   }
 
   $scope.printNameTag = function(UserData) {
-    // alert("printNameTag");
-    // $scope.sendPrint = sendPrint.getInfo("DataUsuario");
-    alert("sendPrint service");
-    alert("User Data: " + UserData);
+
     console.info(UserData)
     if (UserData.Nombre.length > 10 ) {
       var printText = '<html style="width:277px; height:390px">'+
@@ -390,7 +382,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
        });
 
     } else {
-       alert("Printing is not available on device");
+       console.log("Printing is not available on device");
     }
   };
 
