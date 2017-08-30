@@ -46,15 +46,7 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     $("#logoContentId").removeClass("toAnimateDown");
   }
 
-  $scope.enterToHide = function(){
-      cordova.plugins.Keyboard.close();
-  }
-
-  $scope.cambiar = function(){
-    console.log("click");
-  }
-
-  $scope.clickInput = function(model){
+  $scope.downInput = function(){
     $scope.isEmpty = document.getElementById("inputSearch").value;
     if ($scope.isEmpty != "") {
       $scope.classInput = "inputSearchContainerTop"
@@ -68,6 +60,40 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
       $("#logoContentId").addClass("toAnimateDown");
 
     }
+  }
+
+  $scope.enterToHide = function(){
+      cordova.plugins.Keyboard.close();
+      $scope.isEmpty = document.getElementById("inputSearch").value;
+      if ($scope.isEmpty != "") {
+        $scope.classInput = "inputSearchContainerTop"
+        $("#logoContentId").addClass("toAnimateUp");
+        $("#logoContentId").removeClass("toAnimateDown");
+        // $scope.logoContent = false;
+      }
+      else {
+        $scope.classInput = "inputSearchContainer"
+        $("#logoContentId").removeClass("toAnimateUp");
+        $("#logoContentId").addClass("toAnimateDown");
+
+      }
+  }
+
+
+  $scope.clickInput = function(model){
+    // $scope.isEmpty = document.getElementById("inputSearch").value;
+    // if ($scope.isEmpty != "") {
+    //   $scope.classInput = "inputSearchContainerTop"
+    //   $("#logoContentId").addClass("toAnimateUp");
+    //   $("#logoContentId").removeClass("toAnimateDown");
+    //   // $scope.logoContent = false;
+    // }
+    // else {
+    //   $scope.classInput = "inputSearchContainer"
+    //   $("#logoContentId").removeClass("toAnimateUp");
+    //   $("#logoContentId").addClass("toAnimateDown");
+    //
+    // }
       $scope.filterObj(model);
   }
 
@@ -183,12 +209,7 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
 
 
     if($cordovaPrinter.isAvailable()) {
-      $ionicLoading.show({
-         template: 'Loading...',
-       }).then(function(){
-          console.log("The loading indicator is now displayed");
-
-       });
+      $ionicLoading.show();
        $cordovaPrinter.print(printText,{duplex: 'none', landscape: false, graystyle: false, border:false}).then(function(res) {
           $ionicLoading.hide().then(function () {
             $scope.showModalPrint();
@@ -291,7 +312,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
       $scope.info = false;
       $scope.editInfo = false;
       $("#inputFilter").prop('readonly', false);
-      $state.go("insert_name")
+      $state.go("insert_name");
     }
 
     if ($scope.info == true) {
@@ -369,12 +390,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
 
 
     if($cordovaPrinter.isAvailable()) {
-      $ionicLoading.show({
-         template: 'Loading...',
-       }).then(function(){
-          console.log("The loading indicator is now displayed");
-
-       });
+      $ionicLoading.show();
        $cordovaPrinter.print(printText,{duplex: 'none', landscape: false, graystyle: false, border:false}).then(function(res) {
          $ionicLoading.hide().then(function () {
            $scope.showModalPrint();
@@ -388,9 +404,15 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
 
 })
 app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
+  $scope.$on('$ionicView.enter', function() {
+    $("#inputInsertName").val("");
+  });
+
 
   $scope.sendName = function (name) {
     $rootScope.nameUser = name;
+
+    $state.go("info_user");
   }
 
   $scope.upInput = function(){
@@ -399,20 +421,14 @@ app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ion
     $("#logoContentIdInsertNaem").removeClass("toAnimateDown");
   }
 
-  $scope.changeInput = function(model){
-    $scope.isEmpty = document.getElementById("inputInsertName").value;
-    if ($scope.isEmpty != "") {
-      $scope.classInput = "inputSearchContainerTop"
-      $("#logoContentIdInsertNaem").addClass("toAnimateUp");
-      $("#logoContentIdInsertNaem").removeClass("toAnimateDown");
-      // $scope.logoContent = false;
-    }
-    else {
-      $scope.classInput = "inputSearchContainer"
-      $("#logoContentIdInsertNaem").removeClass("toAnimateUp");
-      $("#logoContentIdInsertNaem").addClass("toAnimateDown");
+  $scope.downInput = function(){
+    $scope.classInput = "inputSearchContainer";
+    $("#logoContentIdInsertNaem").addClass("toAnimateDown");
+    $("#logoContentIdInsertNaem").removeClass("toAnimateUp");
+  }
 
-    }
+
+  $scope.changeInput = function(model){
       $scope.filterObj(model);
   }
 })

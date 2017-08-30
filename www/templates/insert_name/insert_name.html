@@ -8,8 +8,8 @@
         </div>
         <div class="inputInsertNameContainer"  ng-class="classInput">
           <div class="">
-            <input id="inputInsertName" type="text" placeholder="Ingresa el nombre" class="inputInsertName" ng-click="upInput()" ng-change="changeInput()" ng-model="name">
-            <button id="buttonSearchId" type="button" class="buttonSearch button button-dark" ui-sref="info_user" ng-click="sendName(name)">Buscar</button>
+            <input id="inputInsertName" type="text" placeholder="Ingresa el nombre" class="inputInsertName" ng-focus="upInput()" ng-blur="downInput()" ng-change="changeInput()" ng-enter="sendName(name)" ng-model="name">
+            <button id="buttonSearchId" type="button" class="buttonSearch button button-dark" ng-click="sendName(name)">Buscar</button>
           </div>
 
         </div>

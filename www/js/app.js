@@ -68,7 +68,7 @@ var app = angular.module('starter', ['ionic' , 'firebase', 'ngCordova'])
   .state('insert_name', {
     url: '/insert_name',
     templateUrl: 'templates/insert_name/insert_name.html',
-    controller: "insert_nameCtrl",
+    controller: "insert_nameCtrl"
   })
 
   .state('info_user', {
