@@ -74,6 +74,10 @@
   height: 100%;
 }
 
+.buttonSearchSize{
+  font-size: 2rem !important;
+}
+
 .tableContainer{
   display: flex;
   justify-content: center;

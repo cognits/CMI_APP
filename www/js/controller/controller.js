@@ -7,6 +7,7 @@ var config = {
     messagingSenderId: "970565718586"
   };
 var CMI = firebase.initializeApp(config);
+
 app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
   var ref = CMI.database().ref('Invitados');
   $rootScope.objeInvitados = $firebaseArray(ref);

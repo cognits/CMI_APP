@@ -6,6 +6,7 @@
         </div>
         <div class="inputSearchContainer"  ng-class="classInput">
           <input id="inputSearch" type="text" placeholder="Busca tu nombre" class="inputSearchYourName" ng-focus="upInput()" ng-blur="downInput()" ng-enter="enterToHide()" ng-change="clickInput(search)" ng-model = 'search'>
+          <button type="button" class="buttonSearchSize button button-dark">Buscar</button>
         </div>
         <div class="tableContainer"  ng-if='search != null && search.length != 0 && search.length != ""'>
 

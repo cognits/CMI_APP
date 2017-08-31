@@ -50,3 +50,7 @@ button{
 .spinner-android{
   stroke: #ff9A00;
 }
+
+.margin-top0{
+  margin-top: 0 !important;
+}
