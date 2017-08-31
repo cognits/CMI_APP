@@ -130,19 +130,36 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     $scope.sendPrint = sendPrint.getInfo($rootScope.$root.selectObj);
   };
 
+  $scope.$on('$ionicView.enter', function() {
+    if ($(".inputSearchYourName").val() == "") {
+      $(".tableContainer").hide();
+      $scope.classInput = "inputSearchContainer"
+      $("#logoContentId").removeClass("toAnimateUp");
+      $("#logoContentId").addClass("toAnimateDown")
+
+    }
+  });
+
 })
 
 
 app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionicModal, $state , $rootScope, $cordovaPrinter){
   $scope.checkYes = function() {
-    $scope.selectYes = "checked"
-    $scope.selectNo = "unchecked"
+    $("#selectYes").addClass("checked")
+    $("#selectYes").removeClass("unchecked")
+
+    $("#selectNo").addClass("unchecked");
+    $("#selectNo").removeClass("checked");
+
     $rootScope.$root.selectObj.Almuerzo = "Si"
   }
 
   $scope.checkNo = function() {
-    $scope.selectYes = "unchecked"
-    $scope.selectNo = "checked"
+    $("#selectNo").addClass("checked")
+    $("#selectNo").removeClass("unchecked")
+
+    $("#selectYes").addClass("unchecked");
+    $("#selectYes").removeClass("checked");
     $rootScope.$root.selectObj.Almuerzo = "No"
   }
 
@@ -290,6 +307,10 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
       }
     })
     //d$scope.selectedInfo = clickedInfo;
+  }
+
+  $scope.hideKeyboard = function(){
+    cordova.plugins.Keyboard.close();
   }
 
   $scope.cancelInfo = function(tableChoose, info, editInfo){
