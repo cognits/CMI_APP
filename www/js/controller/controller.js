@@ -6,6 +6,7 @@ var config = {
     storageBucket: "cmi-db-33e5d.appspot.com",
     messagingSenderId: "970565718586"
   };
+
 var CMI = firebase.initializeApp(config);
 
 app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$http, $ionicModal, $state , $rootScope){
@@ -22,8 +23,8 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
       $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
       $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
       $scope.objResumen.$save()
-  }
-      $scope.resumenInvitados();
+    }
+    $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
           $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
@@ -93,10 +94,11 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     //   $("#logoContentId").addClass("toAnimateDown");
     //
     // }
-      if (($(".tableContainer").is(":visible") === false) && (($("#inputSearch").val().length)>=3) {
-        $(".tableContainer").show();
-      }
-      $scope.filterObj(model);
+
+    if (($(".tableContainer").is(":visible") === false) && (($("#inputSearch").val().length)>=3)) {
+      $(".tableContainer").show();
+    }
+    $scope.filterObj(model);
   }
 
   $scope.leaveInput = function(){
@@ -143,7 +145,6 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   });
 
 })
-
 
 app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionicModal, $state , $rootScope, $cordovaPrinter){
   $scope.checkYes = function() {
@@ -441,6 +442,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
   };
 
 })
+
 app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
   $scope.$on('$ionicView.enter', function() {
     $("#inputInsertName").val("");
