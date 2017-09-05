@@ -14,17 +14,8 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   $rootScope.objeInvitados = $firebaseArray(ref);
   $scope.search = "";
   $scope.resumen = {};
+
   $scope.$root.objeInvitados.$loaded(function() {
-    $scope.resumenInvitados = function () {
-      var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
-      $scope.objResumen = $firebaseObject(refResumen);
-      $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
-      $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-      $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-      $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-      $scope.objResumen.$save()
-    }
-    $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
           $scope.objFiltered = _.filter($scope.$root.objeInvitados, function(obj) {
@@ -139,10 +130,21 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
       $(".tableContainer").hide();
       $scope.classInput = "inputSearchContainer"
       $("#logoContentId").removeClass("toAnimateUp");
-      $("#logoContentId").addClass("toAnimateDown")
-
+      $("#logoContentId").addClass("toAnimateDown");
     }
   });
+
+  $scope.$on('$ionicView.afterEnter', function() {
+    $scope.$root.objeInvitados.$loaded(function() {
+      var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
+      $scope.objResumen = $firebaseObject(refResumen);
+      $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
+      $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+      $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+      $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+      $scope.objResumen.$save();
+    });
+  })
 
 })
 
@@ -251,16 +253,6 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
     var ref = CMI.database().ref('Invitados');
     $rootScope.objeInvitados = $firebaseArray(ref);
     $scope.$root.objeInvitados.$loaded(function() {
-      $scope.resumenInvitados = function () {
-        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
-        $scope.objResumen = $firebaseObject(refResumen);
-        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
-        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-        $scope.objResumen.$save()
-    }
-        $scope.resumenInvitados();
       $scope.saveInfo = function(tableChoose, info, editInfo){
         $scope.tableChoose = tableChoose;
         $scope.info = info;
@@ -278,19 +270,9 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
         $scope.editInfo = editInfo;
         $("#inputFilter").prop('readonly', true);
         window.scrollTo(0,0);
-        $rootScope.objeInvitados.$save($scope.selectedInfo)
+        $rootScope.objeInvitados.$save($scope.selectedInfo);
         //d$scope.selectedInfo = clickedInfo;
       }
-      $scope.resumenInvitados = function () {
-        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
-        $scope.objResumen = $firebaseObject(refResumen);
-        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
-        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-        $scope.objResumen.$save()
-    }
-        $scope.resumenInvitados();
     })
   }
   $scope.filterObj = function (model) {
