@@ -14,17 +14,15 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
   $scope.search = "";
   $scope.resumen = {};
   $scope.$root.objeInvitados.$loaded(function() {
-      $scope.resumenInvitados = function () {
-        var refResumen = CMI.database().ref('Resumen');
-        $rootScope.objResumen = $firebaseArray(refResumen);
-        console.info($scope.$root.objResumen)
-        $scope.resumen.Asistentes = $scope.$root.objeInvitados.length;
-        $scope.resumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
-        $scope.resumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
-        $scope.resumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
-        console.info($scope.resumen)
-        $scope.$root.objResumen.$save($scope.resumen)
-    }
+    $scope.resumenInvitados = function () {
+      var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
+      $scope.objResumen = $firebaseObject(refResumen);
+      $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
+      $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+      $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+      $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+      $scope.objResumen.$save()
+  }
       $scope.resumenInvitados();
     $scope.filterObj = function (model) {
         if(model != "" && model.length > 2){
@@ -95,6 +93,9 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     //   $("#logoContentId").addClass("toAnimateDown");
     //
     // }
+      if (($(".tableContainer").is(":visible") === false) && (($("#inputSearch").val().length)>=3) {
+        $(".tableContainer").show();
+      }
       $scope.filterObj(model);
   }
 
@@ -202,29 +203,26 @@ app.controller("foodCtrl", function($scope,$ionicLoading ,$firebaseArray, $ionic
 
   $scope.printNameTag = function(UserData) {
 
-    if (UserData.Nombre.length > 10 ) {
-      var printText = '<html style="width:277px; height:390px">'+
-                        '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
-                            '<b>'+UserData.Nombre+ '</b>' +
+    if ((UserData.NombreGafete.length) >  10) {
+      var printText = '<html style="width:277px; height:390px;">'+
+                        '<p style="font-size:45px; margin-top:210px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            '<b>'+UserData.NombreGafete+ '</b>' +
                             '<br>' +
                             '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
                             '<br>' +
-                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
                         '</p>' +
                       '</html>'
     } else {
-      var printText = '<html style="width:277px; height:390px">'+
-                        '<p style="font-size:45px; margin-top:200px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+      var printText = '<html style="width:277px; height:390px;">'+
+                        '<p style="font-size:45px; margin-top:237px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
                             //'<br>' +
-                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<b>'+UserData.NombreGafete+ '</b>' +
                             '<br>' +
                             '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
                             '<br>' +
-                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
                         '</p>' +
                       '</html>'
     }
-
 
     if($cordovaPrinter.isAvailable()) {
       $ionicLoading.show();
@@ -252,6 +250,16 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
     var ref = CMI.database().ref('Invitados');
     $rootScope.objeInvitados = $firebaseArray(ref);
     $scope.$root.objeInvitados.$loaded(function() {
+      $scope.resumenInvitados = function () {
+        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
+        $scope.objResumen = $firebaseObject(refResumen);
+        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
+        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+        $scope.objResumen.$save()
+    }
+        $scope.resumenInvitados();
       $scope.saveInfo = function(tableChoose, info, editInfo){
         $scope.tableChoose = tableChoose;
         $scope.info = info;
@@ -272,6 +280,16 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
         $rootScope.objeInvitados.$save($scope.selectedInfo)
         //d$scope.selectedInfo = clickedInfo;
       }
+      $scope.resumenInvitados = function () {
+        var refResumen = CMI.database().ref('Resumen/'+ "-KsedSOU2NE8iQht8iU6");
+        $scope.objResumen = $firebaseObject(refResumen);
+        $scope.objResumen.Asistentes = $scope.$root.objeInvitados.length;
+        $scope.objResumen.NoComeran = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "No"; });
+        $scope.objResumen.UsuariosRegistrados = _.sumBy($scope.$root.objeInvitados , function(o) { return o.Registro == "Si"; });
+        $scope.objResumen.Comeran =_.sumBy($scope.$root.objeInvitados , function(o) { return o.Almuerzo == "Si"; });
+        $scope.objResumen.$save()
+    }
+        $scope.resumenInvitados();
     })
   }
   $scope.filterObj = function (model) {
@@ -387,25 +405,23 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
   $scope.printNameTag = function(UserData) {
 
     console.info(UserData)
-    if (UserData.Nombre.length > 10 ) {
-      var printText = '<html style="width:277px; height:390px">'+
-                        '<p style="font-size:45px; margin-top:170px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
-                            '<b>'+UserData.Nombre+ '</b>' +
+    if ((UserData.NombreGafete.length) >  10) {
+      var printText = '<html style="width:277px; height:390px;">'+
+                        '<p style="font-size:45px; margin-top:210px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+                            '<b>'+UserData.NombreGafete+ '</b>' +
                             '<br>' +
                             '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
                             '<br>' +
-                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
                         '</p>' +
                       '</html>'
     } else {
-      var printText = '<html style="width:277px; height:390px">'+
-                        '<p style="font-size:45px; margin-top:200px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
+      var printText = '<html style="width:277px; height:390px;">'+
+                        '<p style="font-size:45px; margin-top:237px !important; padding:0; text-align:center; color:black;" style="line-height: 10px;">'+
                             //'<br>' +
-                            '<b>'+UserData.Nombre+ '</b>' +
+                            '<b>'+UserData.NombreGafete+ '</b>' +
                             '<br>' +
                             '<b style="font-size:25px; color:#9B9B9B;">' +UserData.NombreUnidad+ '</b>' +
                             '<br>' +
-                            '<img src="http://www.appcoda.com/wp-content/uploads/2013/12/qrcode.jpg" alt="QR CMI PAGE" height="70" width="70">'+
                         '</p>' +
                       '</html>'
     }
