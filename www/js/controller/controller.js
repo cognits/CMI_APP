@@ -108,8 +108,8 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
 
   $ionicModal.fromTemplateUrl('templates/modal_confirm/modal_confirm.html', function(modal) {
     $scope.modal_confirm = modal;
-    }, {
-      scope: $scope,
+  }, {
+    scope: $scope,
     animation: 'slide-in-up',
     focusFirstInput: false
   });
@@ -134,7 +134,7 @@ app.controller("searchCtrl", function($scope ,$firebaseArray,$firebaseObject,$ht
     $scope.sendPrint = sendPrint.getInfo($rootScope.$root.selectObj);
   };
 
-  $scope.$on('$ionicView.enter', function() {
+  $scope.$on('$ionicView.beforeEnter', function() {
     if ($(".inputSearchYourName").val() == "") {
       $(".tableContainer").hide();
       $scope.classInput = "inputSearchContainer"
@@ -444,7 +444,7 @@ app.controller("info_userCtrl", function($scope, $ionicLoading,$cordovaPrinter,$
 })
 
 app.controller("insert_nameCtrl", function($scope,  $firebaseArray, $state, $ionicModal, $rootScope){
-  $scope.$on('$ionicView.enter', function() {
+  $scope.$on('$ionicView.beforeEnter', function() {
     $("#inputInsertName").val("");
   });
 
